@@ -1,0 +1,43 @@
+.rounded--image img{
+    width:153px;
+    height:163px;
+    border-radius: 100%;
+}
+.card--content{
+    &-name{
+        font-size: 20px;
+        color: #5237cc;
+    }
+    &-role{
+        font-size: 12px;
+    }
+    &-address{
+        font-size: 14px;
+        color:#444;
+    }
+}
+
+.add--icon{
+    width:30%;
+    border:1px solid blue;
+    border-radius: 10%;
+    &:hover{
+        background-color: #5237cc;
+        color:#fff;
+    }
+    &-content{
+        font-size: 18px;
+        font-weight: bold;
+        color: #5237cc;
+    }
+}
+.card--shadow{
+    box-shadow: 0px 0px 6px -1px;
+    border-radius: 20px;
+}
+.error-icon{
+    font-size: 34px !important;
+}
+.font{
+    font-size: 20px;
+}

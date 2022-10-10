@@ -1,0 +1,93 @@
+.dash--card{
+    width:100%;
+    border-radius: 20px;
+    height: 180px;
+    box-shadow: 0px 0px 0px grey !important;
+
+}
+
+.brandData{
+    &-icon{
+        width: 26px;
+        font-size: 1.2rem;
+    }
+    &-head{
+        color:#444;
+        font-size: 14px;
+        font-weight: 400;
+    }
+    &-no{
+        font-size: 16px;
+        font-weight: 700;
+    }
+    &-muiDivider{
+        border-bottom-width: inherit !important;
+    }
+}
+
+.revenueDash{
+    width:100%;
+    border-radius: 20px !important;
+    height: 100%;
+    box-shadow: 0px 0px 0px grey !important;
+    &-font{
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+    &-show{
+        width:30px;
+        height: 30px;
+        border-radius: 70%;
+        padding: 5px;
+        background-color: #f4f7f6;
+        font-size: 1rem;
+        color:#444;
+        &:hover{
+            background-color: aquamarine;
+        }
+    }
+    &-icon{
+        font-size: 1.4rem;
+        font-weight: 500;
+        color:#444;
+    }
+}
+
+.revenueMenu{
+    width: 320px;
+    background-color: none !important;
+    height: 100px;
+    border-radius: 10px;
+    &-operation{
+        background-color: #28a745 !important;
+    }
+    &-pharm{
+        background-color: #ffc107 !important;
+    }
+    &-hosp{
+        background-color: #dc3545 !important;
+    }
+    &-font{
+        font-size: 1.5rem;
+        color:#fff;
+    }
+    &-income{
+        font-size: 1rem;
+        color:#fff;
+    }
+}
+.chartBar-container{
+    padding: 30px;
+}
+
+
+
+.tableCell{
+    font-size: 1rem !important;
+    color:#000;
+    font-weight: 900 !important;
+}
+
+.ant-menu{
+   font-size: 18px !important; 
+}

@@ -1,0 +1,42 @@
+.Delete--container{
+    &-text{
+        font-size: 22px;
+    }
+    &-btn{
+        width:100%;
+        padding:10px;
+    }
+}
+.cancel{
+    background-color: #b9b9b9;
+    color: #000;
+}
+.success{
+    background-color: red;
+    color: #fff;
+}
+.delete--img{
+    font-size: 100px;
+    color:red;
+}
+.icons{
+    font-size: 33px;
+}
+
+.loading--container{
+    height: 1000px;
+    width:100%;
+    opacity: 0.3;
+}
+
+.spinner{
+    margin-top:300px!important;
+    color:""
+}
+.modal{
+    top:88px;
+    z-index: 1000;
+}
+.modal-backdrop {
+    z-index:800;
+}

@@ -1,0 +1,65 @@
+.mainHeader{
+    height: 60px;
+    position: static;
+    background-color: #fff;
+}
+.header--logo{
+    padding:0px 100px 0px 0px;
+}
+.header--logo img{
+    width: 65px;
+    height: 70px;
+}
+.header--search{
+    width: 300px;
+}
+.header--search input{
+    width:300px;
+    padding:4px 10px;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+}
+
+.header--icon>div{
+    color:#5a5a5a;
+    font-size: 1.5rem;
+    cursor:pointer;
+}
+.menu--icon{
+    display: none;
+}
+@media (max-width:600px){
+    .header--search{
+        width: 300px;
+        display: none !important;
+    }
+    .header--logo{
+        padding:0px 20px 0px 0px;
+    }
+
+.mobile--show{
+    display: flex !important;
+    color:#000;
+}
+}
+@media (max-width:1024px){
+    .menu--icon{
+        display: block !important;
+        color:#000;
+        font-size: 1rem;
+    }
+}
+.offcanvas-start{
+    top:60px;
+    left:0px;
+    width:250px;
+    border-right: 0px;
+}
+.offcanvas-body{
+    padding:0px;
+    background: #f4f7f6;
+}
+
+.mobile--show{
+    display: none;
+}

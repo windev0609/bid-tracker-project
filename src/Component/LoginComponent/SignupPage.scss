@@ -1,0 +1,134 @@
+.login--container{
+    width:100%;
+    &-active{
+        background-color: #e4e8ed;
+        height:650px;
+    }
+    &-inactive{
+        background-color: #5237cc;
+        height:650px;
+    }
+    &-active img{
+        width: 100%;
+        height:400px;
+        opacity: 1;
+    }
+}
+.heading{
+    color:#5237cc;
+}
+.account--container{
+    border-radius: 20%;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height:600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    background-color: #fff;
+}
+
+.login--box{
+    padding:100px 100px 100px 100px;
+}
+
+.main--input input{
+    padding:10px;
+    border-radius: 20px;
+    outline: none;
+    border: 1px solid #e4e8ed ;
+    width: 100%;
+}
+
+
+.btn--container{
+    margin-top: 10px;
+    background-color:#5237cc ;
+    outline: none;
+    border: 1px solid #5237cc ;
+    color:#fff;
+    padding:10px;
+    border-radius: 10%;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.select-container{
+    padding:10px;
+    font-size: 12px;
+    outline: none;
+    border: 1px solid #e4e8ed ;
+    width: 100%;
+}
+
+@media (max-width: 600px) { 
+    .login--box{
+        padding:0px 0px 0px 0px;
+    }
+    .login--container{
+        &-active{
+            height:300px;
+        }
+        &-active img{
+            width: 100%;
+            height:200px;
+            opacity: 1;
+        }
+        &-inactive{
+            background-color: #5237cc;
+            height:400px;
+        }
+    }
+    .account--container{
+        border-radius: 20%;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        height:600px;
+        width: 500px;
+        background-color: #fff;
+    }
+    
+}
+@media (max-width:768px){
+    .login--container{
+        width:100%;
+        &-active{
+            background-color: #e4e8ed;
+            height:300px;
+        }
+        &-inactive{
+            background-color: #5237cc;
+            height:650px;
+        }
+        &-active img{
+            width: 100%;
+            height:200px;
+            opacity: 1;
+        }
+    }
+    .container{
+        padding:0px !important
+    }
+    .heading{
+        color:#5237cc;
+        font-size: 1.3rem;
+    }
+}
+
+.login--text span{
+    font-size: 12px;
+    font-weight: 500;
+    color:#5237cc;
+    cursor:pointer;
+    text-decoration: underline;
+}
+
+.error-text{
+    color:#5237cc;
+    font-size: 14px;
+}
+
+.demo--show{
+    color:red;
+}

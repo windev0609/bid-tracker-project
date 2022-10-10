@@ -1,0 +1,42 @@
+.timeline {
+    border-left: 1px solid hsl(0, 0%, 90%);
+    position: relative;
+    list-style: none;
+  }
+
+  .timeline .timeline-item {
+    position: relative;
+  }
+
+  .timeline .timeline-item:after {
+    position: absolute;
+    display: block;
+    top: 0;
+    background-color: hsl(0, 0%, 90%);
+    left: -38px;
+    border-radius: 50%;
+    height: 11px;
+    width: 11px;
+    content: "";
+  }
+
+
+  .text-comment{
+    font-size: 14px;
+    &-icons{
+        font-size: 14px;
+        color:#5237cc;
+    }
+  }
+  .text-date{
+    color:#86c541;
+    font-size: 13px;
+
+  }
+  .text-name{
+    font-size: 14px;
+  }
+
+  .reports{
+    width:400px
+  }
