@@ -11,5 +11,5 @@
 
 
 ![project img](https://github.com/ManiMaran001/abcAdminDashboard/blob/main/screenshot/Screenshot%20from%202022-10-11%2007-20-46.png?raw=true)
-![stack Overflow](https://github.com/ManiMaran001/AllServiceHocare/blob/main/Screeshot/mainhome.jpg?raw=true)
-![stack Overflow](https://github.com/ManiMaran001/AllServiceHocare/blob/main/Screeshot/service.jpg?raw=true)
+![stack Overflow](https://github.com/ManiMaran001/abcAdminDashboard/blob/main/screenshot/Screenshot%20from%202022-10-11%2007-21-49.png?raw=true)
+![stack Overflow](https://github.com/ManiMaran001/abcAdminDashboard/blob/main/screenshot/Screenshot%20from%202022-10-11%2007-22-54.png?raw=true)
