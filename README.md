@@ -1,6 +1,6 @@
 
 <div align="center">
-  <h1>Hospital Admin Dashbaord application</h1>
+  <h1>Hospital Admin Dashboard application</h1>
   <h3>please see the website in live preview deployed in netlify</h3>
 ⭐⭐⭐ <a href="https://abc-hospital-demo.vercel.app/login">live hospital admin application link to see please click this</a>⭐⭐⭐
 </div>
