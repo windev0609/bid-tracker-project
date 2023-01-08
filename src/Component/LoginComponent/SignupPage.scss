@@ -6,7 +6,7 @@
     }
     &-inactive{
         background-color: #5237cc;
-        height:650px;
+        height:100vh;
     }
     &-active img{
         width: 100%;
@@ -30,7 +30,7 @@
 }
 
 .login--box{
-    padding:100px 100px 100px 100px;
+    // padding:100px 100px 100px 100px;
 }
 
 .main--input input{
