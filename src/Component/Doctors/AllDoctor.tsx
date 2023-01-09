@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import './AllDoctor.scss';
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Grid } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
@@ -55,11 +56,34 @@ const AllDoctor = () => {
     getAllDoctorProfiles();
   }, [getAllDoctorProfiles]);
 
+  const columns: GridColDef[] = [
+    { field: 'id', headerName: 'No', width: 70 },
+    { field: 'username', headerName: 'UserName', width: 130 },
+    { field: 'clientname', headerName: 'ClientName', width: 180 },
+    {
+      field: 'ccountry',
+      headerName: 'ClientCountry',
+      width: 180
+    },
+    { field: 'joindate', headerName: 'JoinDate', width: 200 },
+    { field: 'jobjoindate', headerName: 'JobJoinDate', width: 200 },
+    { field: 'bidcount', headerName: 'BidCount' }
+    // {
+    //   field: 'fullName',
+    //   headerName: 'Full name',
+    //   description: 'This column has a value getter and is not sortable.',
+    //   sortable: false,
+    //   width: 160,
+    //   valueGetter: (params: GridValueGetterParams) =>
+    //     `${params.row.firstName || ''} ${params.row.lastName || ''}`
+    // }
+  ];
+
   return (
     <div className="w-100 mt-3 cursor-pointer">
       <Grid container>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <Grid container spacing={2}>
+          <Grid container>
             <Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
               <div className="w-100 h-100 card--shadow">
                 <div className="w-48 h-100 rounded overflow-hidden shadow-lg d-flex justify-content-center align-items-center">
@@ -76,7 +100,7 @@ const AllDoctor = () => {
               <CustomAddModal id={'exampleModal'} />
             </Grid>
             {/* {loading && <Loader />} */}
-            {reportsData?.length !== 0 ? (
+            {/* {reportsData?.length === 0 ? (
               reportsData?.map((item: DoctorProfile) => {
                 return (
                   <>
@@ -129,7 +153,16 @@ const AllDoctor = () => {
               //   <p className="font">no any doctors</p>
               // </div>
               <Loader />
-            )}
+            )} */}
+            <div style={{ height: '100vh', width: '100%' }}>
+              <DataGrid
+                rows={reportsData ? reportsData : []}
+                columns={columns}
+                pageSize={5}
+                rowsPerPageOptions={[5]}
+                checkboxSelection
+              />
+            </div>
           </Grid>
         </Grid>
       </Grid>
