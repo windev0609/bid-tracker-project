@@ -31,8 +31,8 @@ const BreadCrumbComponent: React.FC<{ pathname: string }> = ({ pathname }) => {
       }
       case '/dashboard/AllDoctor': {
         return {
-          path: 'All Doctor',
-          route: ['Doctors', 'AllDoctor']
+          path: 'All Bids',
+          route: ['Bids', 'AllBids']
         };
       }
       case '/dashboard/AllPatients': {

@@ -65,7 +65,7 @@ const AllDoctor = () => {
                 <div className="w-48 h-100 rounded overflow-hidden shadow-lg d-flex justify-content-center align-items-center">
                   <div className="d-flex justify-content-center p-3 flex-column align-items-center">
                     <div>
-                      <p className="add--icon-content">Add new Doctor</p>
+                      <p className="add--icon-content">Add new Bid</p>
                     </div>
                     <div className="add--icon">
                       <AddIcon data-bs-toggle="modal" data-bs-target="#exampleModal" />
