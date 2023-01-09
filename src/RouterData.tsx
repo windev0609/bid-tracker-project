@@ -55,7 +55,7 @@ export const RouterData = [
   },
 
   {
-    name: 'Doctors',
+    name: 'Bids',
     path: '',
     layout: '/dashboard',
     component: null,
@@ -64,8 +64,8 @@ export const RouterData = [
     icon: <AiOutlineUserAdd />,
     menuItems: [
       {
-        path: '/AllDoctor',
-        name: 'All Doctor',
+        path: '/AllBid',
+        name: 'All Bids',
         layout: '/dashboard',
         icon: <AiOutlineUserAdd />,
         key: 'sub-doc1',

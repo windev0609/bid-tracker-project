@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { Grid } from '@mui/material';
+import { Grid, TextField, Checkbox, FormControlLabel } from '@mui/material';
 import FormikControl from '../CustomComponent/FormikControl';
 import { PostDoctorInfo } from '../Redux/DoctorSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store';
 import { IoIosClose } from 'react-icons/io';
 import './CustomPatientDelete.scss';
+
+import * as mui from '@mui/material';
+import * as antd from 'antd';
+
 interface CountryOption {
   id: string;
   key: string;
@@ -85,7 +89,7 @@ const CustomAddModal: React.FC<{ id: string }> = ({ id }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
-              Add Doctor
+              Add Bid
             </h5>
             <IoIosClose data-bs-dismiss="modal" aria-label="Close" className="icons" />
           </div>
@@ -97,36 +101,25 @@ const CustomAddModal: React.FC<{ id: string }> = ({ id }) => {
               {(formik) => (
                 <Form onSubmit={formik.handleSubmit}>
                   <div>
-                    <Grid container>
-                      <Grid item xs={12}>
-                        <FormikControl
-                          control="upload"
-                          name="doctorImage"
-                          type="file"
-                          onChange={(event: any) => {
-                            formik.setFieldValue('doctorImage', event.target.files[0]);
-                            const reader = new FileReader();
-
-                            reader.onload = () => {
-                              const images = reader.result;
-                              setImg(images);
-                            };
-                            if (event.target.files[0]) {
-                              reader.readAsDataURL(event.target.files[0]);
-                            }
-                          }}
-                          error={formik.errors.doctorImage}
-                          imgData={image}
-                          test="test1"
-                        />
-                      </Grid>
-                    </Grid>
                     <Grid container spacing={2}>
                       <Grid item xs={6}>
                         <FormikControl
                           control="input"
                           type="text"
-                          label="Name"
+                          label="YourName"
+                          name="yourName"
+                          onBlur={formik.handleBlur}
+                          onChange={formik.handleChange}
+                          error={formik.touched.doctorName && Boolean(formik.errors.doctorName)}
+                          helperText={formik.touched.doctorName && formik.errors.doctorName}
+                          test="err1"
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="input"
+                          type="text"
+                          label="ClinetName"
                           name="doctorName"
                           onBlur={formik.handleBlur}
                           onChange={formik.handleChange}
@@ -138,20 +131,8 @@ const CustomAddModal: React.FC<{ id: string }> = ({ id }) => {
                       <Grid item xs={6}>
                         <FormikControl
                           control="input"
-                          type="email"
-                          label="Email"
-                          name="email"
-                          onChange={formik.handleChange}
-                          error={formik.touched.email && Boolean(formik.errors.email)}
-                          helperText={formik.touched.email && formik.errors.email}
-                          test="err2"
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <FormikControl
-                          control="input"
                           type="text"
-                          label="Address"
+                          label="ClientCountry"
                           name="address"
                           onChange={formik.handleChange}
                           error={formik.touched.address && Boolean(formik.errors.address)}
@@ -163,7 +144,7 @@ const CustomAddModal: React.FC<{ id: string }> = ({ id }) => {
                         <FormikControl
                           control="input"
                           type="text"
-                          label="PhoneNumber"
+                          label="ClientPayPrice"
                           name="phoneNumber"
                           onChange={formik.handleChange}
                           error={formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)}
@@ -173,32 +154,8 @@ const CustomAddModal: React.FC<{ id: string }> = ({ id }) => {
                       </Grid>
                       <Grid item xs={6}>
                         <FormikControl
-                          control="select"
-                          label="Country"
-                          name="country"
-                          options={CountryOptions}
-                          onChange={formik.handleChange}
-                          error={formik.touched.country && Boolean(formik.errors.country)}
-                          helperText={formik.touched.country && formik.errors.country}
-                          test="err5"
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <FormikControl
-                          control="select"
-                          label="Speciality"
-                          name="specialist"
-                          onChange={formik.handleChange}
-                          options={specialistData}
-                          error={formik.touched.specialist && Boolean(formik.errors.specialist)}
-                          helperText={formik.touched.specialist && formik.errors.specialist}
-                          test="err6"
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <FormikControl
                           control="input"
-                          label="Dob"
+                          label="WhenPayPrice"
                           name="dob"
                           type="date"
                           onChange={formik.handleChange}
@@ -206,6 +163,28 @@ const CustomAddModal: React.FC<{ id: string }> = ({ id }) => {
                           helperText={formik.touched.dob && formik.errors.dob}
                           test="err7"
                         />
+                      </Grid>
+                      <Grid item xs={6}></Grid>
+                      <Grid item xs={6}>
+                        <FormControlLabel
+                          control={<Checkbox defaultChecked />}
+                          label="ClientPaymentVerify"
+                          style={{ float: 'left' }}
+                          onChange={formik.handleChange}
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <FormControlLabel
+                          control={<Checkbox defaultChecked />}
+                          label="ClientIdVerify"
+                          style={{ float: 'left' }}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <mui.FormControl fullWidth sx={{ m: 1 }} variant="filled">
+                          <mui.InputLabel htmlFor="filled-adornment-amount">Bid</mui.InputLabel>
+                          <mui.FilledInput id="filled-adornment-amount" rows={4} multiline />
+                        </mui.FormControl>
                       </Grid>
                     </Grid>
                     <div></div>

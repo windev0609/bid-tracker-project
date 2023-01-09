@@ -124,7 +124,7 @@ const MainDashboard = () => {
                 <FaUserAlt className="brandData-icon" />
               </div>
               <div className="d-flex flex-column align-items-start">
-                <span className="brandData-head">Total Doctors</span>
+                <span className="brandData-head">Total Bids</span>
                 <span className="brandData-no">{DoctorsData?.length}</span>
               </div>
             </div>

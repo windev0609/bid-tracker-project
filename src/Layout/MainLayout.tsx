@@ -13,6 +13,8 @@ import { UserContextType } from '../TypeFile/TypeScriptType';
 import Header from '../Component/HeaderComponent/Header';
 const drawerWidth = 240;
 
+import * as antd from 'antd';
+
 type MenuItem = Required<MenuProps>['items'][number];
 
 function getItem(
@@ -122,7 +124,7 @@ const MainLayout = () => {
       case '/dashboard/AllDoctor': {
         return {
           defaultOpenKeys: ['sub4', 'sub-doc1'],
-          defaultSelectedKeys: ['All Doctor', 'Doctors']
+          defaultSelectedKeys: ['All Bids', 'Bids']
         };
       }
       case '/dashboard/ViewDoctor': {

@@ -10,8 +10,8 @@ const useAuth = () => {
 
 const ProtectedRoute = () => {
   const auth = useAuth();
-
   return auth ? <Outlet /> : <Navigate to="/login" />;
+  // return <Outlet />;
 };
 
 export default ProtectedRoute;
