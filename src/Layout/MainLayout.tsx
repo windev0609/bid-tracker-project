@@ -121,7 +121,7 @@ const MainLayout = () => {
           defaultSelectedKeys: ['All Patients']
         };
       }
-      case '/dashboard/AllDoctor': {
+      case '/dashboard/AllBids': {
         return {
           defaultOpenKeys: ['sub4', 'sub-doc1'],
           defaultSelectedKeys: ['All Bids', 'Bids']

@@ -29,10 +29,10 @@ const BreadCrumbComponent: React.FC<{ pathname: string }> = ({ pathname }) => {
           route: ['taskboard']
         };
       }
-      case '/dashboard/AllDoctor': {
+      case '/dashboard/AllBids': {
         return {
           path: 'All Bids',
-          route: ['Bids', 'AllBids']
+          route: ['Bid', 'AllBids']
         };
       }
       case '/dashboard/AllPatients': {

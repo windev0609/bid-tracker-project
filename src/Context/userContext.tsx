@@ -28,7 +28,17 @@ const UserProvider: React.FC<Props> = ({ children }) => {
     specialist: '',
     country: '',
     _id: '',
-    doctorImage: ''
+    doctorImage: '',
+    yourName: '',
+    clientCountry: '',
+    clientPayPrice: '',
+    whenClientJoin: '',
+    whenJobJoin: '',
+    bidCount: '',
+    clientPV: '',
+    clientIV: '',
+    bid: '',
+    chat: ''
   });
   const [show, setShow] = useState<boolean>(false);
   const [hideSidebar, sethideBar] = useState<boolean>(true);

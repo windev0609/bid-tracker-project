@@ -18,6 +18,9 @@ import CustomDoctorDelete from '../../Utils/CustomDoctorDelete';
 import { userContext } from '../../Context/userContext';
 import { Dots } from 'react-activity';
 import 'react-activity/dist/library.css';
+
+import { BsChatLeftText } from 'react-icons/bs';
+
 const AllDoctor = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [open, setOpen] = React.useState(false);
@@ -154,6 +157,8 @@ const AllDoctor = () => {
               // </div>
               <Loader />
             )} */}
+<<<<<<< HEAD
+=======
             <div style={{ height: '100vh', width: '100%' }}>
               <DataGrid
                 rows={reportsData ? reportsData : []}
@@ -163,6 +168,7 @@ const AllDoctor = () => {
                 checkboxSelection
               />
             </div>
+>>>>>>> e6cc090ade9a69a83c680b2456b8b44d668ae3a1
           </Grid>
         </Grid>
       </Grid>

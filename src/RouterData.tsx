@@ -8,6 +8,8 @@ const ViewDoctor = React.lazy(() => import('./Component/Doctors/ViewDoctor'));
 const ViewPatients = React.lazy(() => import('./Component/Patients/ViewPatients'));
 const SignupPage = React.lazy(() => import('./Component/LoginComponent/SignupPage'));
 
+import { BsChatLeftText, BsChatLeftTextFill } from 'react-icons/bs';
+
 export const RouterData = [
   {
     path: '/',
@@ -55,41 +57,21 @@ export const RouterData = [
   },
 
   {
-    name: 'Bids',
+    name: 'Bid',
     path: '',
     layout: '/dashboard',
     component: null,
     submenu: true,
     key: 'sub4',
-    icon: <AiOutlineUserAdd />,
+    icon: <BsChatLeftText />,
     menuItems: [
       {
-        path: '/AllBid',
+        path: '/AllBids',
         name: 'All Bids',
         layout: '/dashboard',
-        icon: <AiOutlineUserAdd />,
+        icon: <BsChatLeftTextFill />,
         key: 'sub-doc1',
         component: <AllDoctor />,
-        visibleInMenu: true
-      }
-    ]
-  },
-  {
-    name: 'Patients',
-    path: '',
-    component: null,
-    layout: '/dashboard',
-    key: 'sub5',
-    submenu: true,
-    icon: <AiOutlineUserAdd />,
-    menuItems: [
-      {
-        path: '/AllPatients',
-        name: 'All Patients',
-        layout: '/dashboard',
-        icon: <AiOutlineUserAdd />,
-        key: 'sub-patient1',
-        component: <AllPatientsView />,
         visibleInMenu: true
       }
     ]
