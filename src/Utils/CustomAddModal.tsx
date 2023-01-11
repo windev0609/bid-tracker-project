@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { Grid, TextField, Checkbox, FormControlLabel } from '@mui/material';
+import { Grid, TextField, Checkbox, FormControlLabel, FormControl } from '@mui/material';
 import FormikControl from '../CustomComponent/FormikControl';
 import { PostDoctorInfo } from '../Redux/DoctorSlice';
 import { useDispatch } from 'react-redux';
@@ -11,6 +11,7 @@ import './CustomPatientDelete.scss';
 
 import * as mui from '@mui/material';
 import * as antd from 'antd';
+import axios from 'axios';
 
 interface CountryOption {
   id: string;
@@ -23,6 +24,7 @@ interface SpecialistDoctor {
   data: string;
 }
 interface DoctorInfo {
+  yourName: string;
   email: string;
   doctorName: string;
   address: string;
@@ -31,27 +33,38 @@ interface DoctorInfo {
   specialist: string;
   country: string;
   doctorImage: string;
+  clientPV: string;
+  clientIV: string;
+  bid: string;
+  chat: string;
 }
 const signinSchema = Yup.object().shape({
   email: Yup.string().email().required('Enter valid email-id'),
-  doctorName: Yup.string().required('name is required'),
+  yourName: Yup.string().required('Yourname is required'),
+  doctorName: Yup.string().required('Clinetname is required'),
   address: Yup.string().required('address is required'),
   phoneNumber: Yup.string().required('phone number is required'),
   country: Yup.string().required('country is required'),
   specialist: Yup.string().required('speciality is required'),
   dob: Yup.string().required('Dob is required'),
-  doctorImage: Yup.mixed().required('File is required')
+  doctorImage: Yup.mixed().required('File is required'),
+  clientPV: Yup.mixed().required('ClientPaymentVeryfy is required')
 });
 
 const initial = {
-  doctorName: '',
+  yourName: '',
   email: '',
+  doctorName: '',
   address: '',
   phoneNumber: '',
   specialist: '',
   country: '',
   dob: '',
-  doctorImage: ''
+  doctorImage: '',
+  clientPV: '',
+  clientIV: '',
+  bid: '',
+  chat: ''
 };
 
 const CountryOptions: CountryOption[] = [
@@ -71,7 +84,9 @@ const CustomAddModal: React.FC<{ id: string }> = ({ id }) => {
   const [image, setImg] = useState<string | ArrayBuffer | null>('');
   const dispatch = useDispatch<AppDispatch>();
   const handleSubmit = (data: DoctorInfo) => {
+    console.log('BidsData', data);
     const formData: any = new FormData();
+    formData.append('yourName', data?.yourName);
     formData.append('doctorName', data?.doctorName);
     formData.append('email', data?.email);
     formData.append('phoneNumber', data?.phoneNumber);
@@ -80,6 +95,11 @@ const CustomAddModal: React.FC<{ id: string }> = ({ id }) => {
     formData.append('country', data?.country);
     formData.append('doctorImage', data?.doctorImage);
     formData.append('dob', data?.dob);
+    formData.append('clientPV', data?.clientPV);
+    formData.append('clientIV', data?.clientIV);
+    formData.append('bid', data?.bid);
+    formData.append('chat', data?.chat);
+    // formData.appent('clientIV', data?.clientIV);
     setCheckError(!checkError);
     dispatch(PostDoctorInfo(formData));
   };
@@ -110,8 +130,8 @@ const CustomAddModal: React.FC<{ id: string }> = ({ id }) => {
                           name="yourName"
                           onBlur={formik.handleBlur}
                           onChange={formik.handleChange}
-                          error={formik.touched.doctorName && Boolean(formik.errors.doctorName)}
-                          helperText={formik.touched.doctorName && formik.errors.doctorName}
+                          error={formik.touched.yourName && Boolean(formik.errors.yourName)}
+                          helperText={formik.touched.yourName && formik.errors.yourName}
                           test="err1"
                         />
                       </Grid>
@@ -155,7 +175,7 @@ const CustomAddModal: React.FC<{ id: string }> = ({ id }) => {
                       <Grid item xs={6}>
                         <FormikControl
                           control="input"
-                          label="WhenPayPrice"
+                          label="WhenClientJoin"
                           name="dob"
                           type="date"
                           onChange={formik.handleChange}
@@ -164,14 +184,47 @@ const CustomAddModal: React.FC<{ id: string }> = ({ id }) => {
                           test="err7"
                         />
                       </Grid>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="input"
+                          label="WhenJobJoin"
+                          name="dob"
+                          type="date"
+                          onChange={formik.handleChange}
+                          error={formik.touched.dob && Boolean(formik.errors.dob)}
+                          helperText={formik.touched.dob && formik.errors.dob}
+                          test="err7"
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="input"
+                          type="text"
+                          label="BidCount"
+                          name="phoneNumber"
+                          onChange={formik.handleChange}
+                          error={formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)}
+                          helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
+                          test="err4"
+                        />
+                      </Grid>
                       <Grid item xs={6}></Grid>
                       <Grid item xs={6}>
-                        <FormControlLabel
-                          control={<Checkbox defaultChecked />}
-                          label="ClientPaymentVerify"
-                          style={{ float: 'left' }}
-                          onChange={formik.handleChange}
-                        />
+                        <FormControl
+                          // name="clientPV"
+                          required
+                          error={formik.touched.clientPV && Boolean(formik.errors.clientPV)}
+                          // helperText={formik.touched.dob && formik.errors.dob}
+                          // helperText={formik.touched.clientPV && formik.errors.clientPV}
+                          // test="err7"
+                        >
+                          <FormControlLabel
+                            control={<Checkbox defaultChecked />}
+                            label="ClientPaymentVerify"
+                            style={{ float: 'left' }}
+                            onChange={formik.handleChange}
+                          />
+                        </FormControl>
                       </Grid>
                       <Grid item xs={6}>
                         <FormControlLabel
@@ -183,7 +236,13 @@ const CustomAddModal: React.FC<{ id: string }> = ({ id }) => {
                       <Grid item xs={12}>
                         <mui.FormControl fullWidth sx={{ m: 1 }} variant="filled">
                           <mui.InputLabel htmlFor="filled-adornment-amount">Bid</mui.InputLabel>
-                          <mui.FilledInput id="filled-adornment-amount" rows={4} multiline />
+                          <mui.FilledInput id="filled-adornment-bid" rows={4} multiline />
+                        </mui.FormControl>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <mui.FormControl fullWidth sx={{ m: 1 }} variant="filled">
+                          <mui.InputLabel htmlFor="filled-adornment-amount">Chat</mui.InputLabel>
+                          <mui.FilledInput id="filled-adornment-chat" rows={4} multiline />
                         </mui.FormControl>
                       </Grid>
                     </Grid>
@@ -194,9 +253,11 @@ const CustomAddModal: React.FC<{ id: string }> = ({ id }) => {
                       Cancel
                     </button>
                     <button
+                      type="submit"
                       className="btn btn-secondary"
                       data-bs-dismiss={`${checkError ? 'modal' : ''}`}
-                      aria-label="Close">
+                      aria-label="Close"
+                      onClick={() => console.log('clicked--------------------------------->')}>
                       save
                     </button>
                   </div>

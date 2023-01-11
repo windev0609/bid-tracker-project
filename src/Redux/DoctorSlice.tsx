@@ -11,6 +11,16 @@ interface DoctorInfo {
   dob: string;
   specialist: string;
   country: string;
+  yourName: string;
+  clientCountry: string;
+  clientPayPrice: string;
+  whenClientJoin: string;
+  whenJobJoin: string;
+  bidCount: string;
+  clientPV: string;
+  clientIV: string;
+  bid: string;
+  chat: string;
 }
 export const PostDoctorInfo = (data: DoctorInfo) => {
   return async (dispatch: AppDispatch) => {

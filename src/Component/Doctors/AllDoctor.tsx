@@ -17,6 +17,9 @@ import CustomDoctorDelete from '../../Utils/CustomDoctorDelete';
 import { userContext } from '../../Context/userContext';
 import { Dots } from 'react-activity';
 import 'react-activity/dist/library.css';
+
+import { BsChatLeftText } from 'react-icons/bs';
+
 const AllDoctor = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [open, setOpen] = React.useState(false);
@@ -76,7 +79,7 @@ const AllDoctor = () => {
               <CustomAddModal id={'exampleModal'} />
             </Grid>
             {/* {loading && <Loader />} */}
-            {reportsData?.length !== 0 ? (
+            {/* {reportsData?.length !== 0 ? (
               reportsData?.map((item: DoctorProfile) => {
                 return (
                   <>
@@ -129,7 +132,7 @@ const AllDoctor = () => {
               //   <p className="font">no any doctors</p>
               // </div>
               <Loader />
-            )}
+            )} */}
           </Grid>
         </Grid>
       </Grid>

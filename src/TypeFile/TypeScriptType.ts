@@ -6,7 +6,7 @@ export interface Signup {
 }
 export interface Signin {
   email: string;
-  password: string;
+  user_password: string;
 }
 
 export interface DoctorProfile {
@@ -58,6 +58,16 @@ export interface DoctorEditType {
   specialist: string;
   country: string;
   _id: string;
+  yourName: string;
+  clientCountry: string;
+  clientPayPrice: string;
+  whenClientJoin: string;
+  whenJobJoin: string;
+  bidCount: string;
+  clientPV: string;
+  clientIV: string;
+  bid: string;
+  chat: string;
 }
 
 export interface PatientModel {

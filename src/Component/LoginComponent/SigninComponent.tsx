@@ -12,7 +12,7 @@ import { Signin, UserContextType } from '../../TypeFile/TypeScriptType';
 import { useNavigate } from 'react-router-dom';
 const signinSchema = Yup.object().shape({
   email: Yup.string().email().required('Enter valid email-id'),
-  password: Yup.string()
+  user_password: Yup.string()
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{8,})/,
       'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character'
@@ -28,6 +28,7 @@ const SigninComponent: React.FC = () => {
   const { AuthTool } = React.useContext(userContext) as UserContextType;
   const handleLoginSubmit = (values: Signin) => {
     setLoading(true);
+    console.log('values:', values);
     dispatch(LoginAction(values, navigate));
   };
   const Loader = () => {
@@ -48,7 +49,7 @@ const SigninComponent: React.FC = () => {
     <div>
       <Formik
         initialValues={{
-          password: '',
+          user_password: '',
           email: ''
         }}
         onSubmit={(values) => handleLoginSubmit(values)}
@@ -71,13 +72,13 @@ const SigninComponent: React.FC = () => {
                 </p>
                 <input
                   placeholder="password"
-                  name="password"
+                  name="user_password"
                   type="text"
                   onChange={formik.handleChange}
-                  data-testid="password"
+                  data-testid="user_password"
                 />
                 <p className="error-text" data-testid="error-test2">
-                  {formik.errors.password}
+                  {formik.errors.user_password}
                 </p>
               </div>
               <div className="d-flex align-items-center justify-content-center">

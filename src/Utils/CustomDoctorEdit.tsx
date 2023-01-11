@@ -11,6 +11,10 @@ import { userContext } from '../Context/userContext';
 import { IoIosClose } from 'react-icons/io';
 import './CustomPatientDelete.scss';
 import { UpdateDoctorInfo } from '../Redux/DoctorSlice';
+
+import { Formik } from 'formik';
+import * as mui from '@mui/material';
+import { TextField, Checkbox, FormControlLabel, FormControl } from '@mui/material';
 interface CountryOption {
   id: string;
   key: string;
@@ -29,7 +33,28 @@ interface DoctorInfo {
   dob: string;
   specialist: string;
   country: string;
+  yourName: string;
+  doctorImage: string;
+  clientPV: string;
+  clientIV: string;
+  bid: string;
+  chat: string;
 }
+const initial = {
+  email: '',
+  doctorName: '',
+  address: '',
+  phoneNumber: '',
+  dob: '',
+  specialist: '',
+  country: '',
+  yourName: '',
+  doctorImage: '',
+  clientPV: '',
+  clientIV: '',
+  bid: '',
+  chat: ''
+};
 const signinSchema = Yup.object().shape({
   email: Yup.string().email().required('Enter valid email-id'),
   doctorName: Yup.string().required('name is required'),
@@ -187,7 +212,17 @@ const CustomDoctorEdit: React.FC<{ id: string }> = ({ id }) => {
         phoneNumber: EditedDoctor?.phoneNumber,
         dob: convertToDate(EditedDoctor?.dob),
         specialist: EditedDoctor?.specialist,
-        country: EditedDoctor?.country
+        country: EditedDoctor?.country,
+        yourName: EditedDoctor?.yourName,
+        clientCountry: EditedDoctor?.clientCountry,
+        clientPayPrice: EditedDoctor?.clientPayPrice,
+        whenClientJoin: convertToDate(EditedDoctor?.whenClientJoin),
+        whenJobJoin: convertToDate(EditedDoctor?.whenJobJoin),
+        clientIV: EditedDoctor?.clientIV,
+        bidCount: EditedDoctor?.bidCount,
+        clientPV: EditedDoctor?.clientPV,
+        bid: EditedDoctor?.bid,
+        chat: EditedDoctor?.chat
       };
     },
     handleSubmit: (values) => {

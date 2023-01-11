@@ -13,9 +13,15 @@ export const SignupAction = (data: Signup) => async (dispatch: AppDispatch) => {
       method: 'POST',
       url: Constants.BaseUrl + ApiEndpoint.SignupAuthentication,
       data
-    }).then((res) => {
-      return res.data;
-    });
+    })
+      .then((res) => {
+        console.log('success', res.data);
+        return res.data;
+      })
+      .catch((err) => {
+        console.log('error', err);
+        return err;
+      });
     if (SignupResponse) {
       TokenService.setSignupUser(SignupResponse?.token);
       dispatch(setSignUpSuccess(SignupResponse));
@@ -33,22 +39,47 @@ export const SignupAction = (data: Signup) => async (dispatch: AppDispatch) => {
 
 export const LoginAction = (data: Signin, navigate: any) => async (dispatch: AppDispatch) => {
   try {
-    const LoginResponse = await axios({
-      method: 'POST',
-      url: Constants.BaseUrl + ApiEndpoint.LoginAuthentication,
+    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    axios({
+      method: 'get',
+      url: `http://192.168.104.113:8080/api/login`,
+      withCredentials: false,
       data
-    }).then((res) => {
-      return res.data;
     });
-    if (LoginResponse) {
-      if (LoginResponse.token && LoginResponse.refreshToken) {
-        TokenService.setAccessToken(LoginResponse?.token);
-        TokenService.setRefreshToken(LoginResponse?.refreshToken);
-        navigate('/dashboard/maindashboard');
-      }
-      dispatch(setLoginSuccess(LoginResponse));
-      dispatch(setStatus('success'));
-    }
+    // axios.defaults.baseURL = 'http://myurl';
+    // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+    // axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    // axios
+    //   .post('http://192.168.104.113:8080/api/login', data)
+    //   .then((res) => {
+    //     return res.data;
+    //   })
+    //   .catch((err) => {
+    //     console.log('err', err);
+    //     return err;
+    //   });
+    //   method: 'POST',
+    //   withCredentials: false,
+    //   url: Constants.BaseUrl + ApiEndpoint.LoginAuthentication,
+    //   data
+    // })
+    //   .then((res) => {
+    //     console.log('success', res.data);
+    //     return res.data;
+    //   })
+    //   .catch((err) => {
+    //     console.log('error', err);
+    //     return err;
+    //   });
+    // if (LoginResponse) {
+    //   if (LoginResponse.token && LoginResponse.refreshToken) {
+    //     TokenService.setAccessToken(LoginResponse?.token);
+    //     TokenService.setRefreshToken(LoginResponse?.refreshToken);
+    //     navigate('/dashboard/maindashboard');
+    //   }
+    //   dispatch(setLoginSuccess(LoginResponse));
+    //   dispatch(setStatus('success'));
+    // }
   } catch (err) {
     const error = err as any;
     const { message } = error.response.data;
