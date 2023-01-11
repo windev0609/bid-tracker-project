@@ -157,8 +157,6 @@ const AllDoctor = () => {
               // </div>
               <Loader />
             )} */}
-<<<<<<< HEAD
-=======
             <div style={{ height: '100vh', width: '100%' }}>
               <DataGrid
                 rows={reportsData ? reportsData : []}
@@ -168,7 +166,6 @@ const AllDoctor = () => {
                 checkboxSelection
               />
             </div>
->>>>>>> e6cc090ade9a69a83c680b2456b8b44d668ae3a1
           </Grid>
         </Grid>
       </Grid>
