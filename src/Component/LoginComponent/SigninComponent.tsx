@@ -52,13 +52,8 @@ const SigninComponent: React.FC = () => {
     <div>
       <Formik
         initialValues={{
-<<<<<<< HEAD
-          user_password: '',
-          email: ''
-=======
           email: '',
           user_password: ''
->>>>>>> e6cc090ade9a69a83c680b2456b8b44d668ae3a1
         }}
         onSubmit={(values) => handleLoginSubmit(values)}
         validationSchema={signinSchema}>

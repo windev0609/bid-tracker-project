@@ -14,15 +14,9 @@ export const SignupAction = (data: Signup) => async (dispatch: AppDispatch) => {
       method: 'POST',
       url: Constants.BaseUrl + ApiEndpoint.SignupAuthentication,
       data
-    })
-      .then((res) => {
-        console.log('success', res.data);
-        return res.data;
-      })
-      .catch((err) => {
-        console.log('error', err);
-        return err;
-      });
+    }).then((res) => {
+      return res.data;
+    });
     if (SignupResponse) {
       TokenService.setSignupUser(SignupResponse?.token);
       dispatch(setSignUpSuccess(SignupResponse));
