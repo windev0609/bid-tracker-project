@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import { Constants, ApiEndpoint } from '../Constants/Constant';
 import TokenService from '../Constants/token.service';
 import Api from '../Constants/Instance';
 import { toast } from 'react-toastify';
 import { AppDispatch } from '../store';
 import { Signin, Signup } from '../TypeFile/TypeScriptType';
+import { url } from 'inspector';
 
 export const SignupAction = (data: Signup) => async (dispatch: AppDispatch) => {
   try {
@@ -33,14 +34,30 @@ export const SignupAction = (data: Signup) => async (dispatch: AppDispatch) => {
 
 export const LoginAction = (data: Signin, navigate: any) => async (dispatch: AppDispatch) => {
   try {
+    // axios
+    //   .post('http://192.168.104.113:8080/api/login', data)
+    //   .then((res) => {
+    //     console.log('res:', res);
+    //   })
+    //   .catch((err) => {
+    //     console.log('error:', err);
+    //   });
+    console.log('Signin:', data);
     const LoginResponse = await axios({
       method: 'POST',
       url: Constants.BaseUrl + ApiEndpoint.LoginAuthentication,
       data
-    }).then((res) => {
-      return res.data;
-    });
+    })
+      .then((res) => {
+        console.log('what is return', res.data);
+        return res.data;
+      })
+      .catch((err) => {
+        console.log('what is error', err);
+        return err;
+      });
     if (LoginResponse) {
+      navigate('/dashboard/maindashboard');
       if (LoginResponse.token && LoginResponse.refreshToken) {
         TokenService.setAccessToken(LoginResponse?.token);
         TokenService.setRefreshToken(LoginResponse?.refreshToken);

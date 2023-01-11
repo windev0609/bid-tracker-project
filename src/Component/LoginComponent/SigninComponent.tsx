@@ -12,23 +12,27 @@ import { Signin, UserContextType } from '../../TypeFile/TypeScriptType';
 import { useNavigate } from 'react-router-dom';
 const signinSchema = Yup.object().shape({
   email: Yup.string().email().required('Enter valid email-id'),
-  password: Yup.string()
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{8,})/,
-      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character'
-    )
+  user_password: Yup.string()
+    // .matches(
+    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{8,})/,
+    //   'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character'
+    // )
     .required('Password is required')
 });
 const SigninComponent: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const LoginResponse = useSelector((state: RootState) => state?.users.status);
-  console.log(LoginResponse, 'same');
+  // console.log(LoginResponse, 'same');
   const [loading, setLoading] = useState<boolean>(false);
   const { AuthTool } = React.useContext(userContext) as UserContextType;
   const handleLoginSubmit = (values: Signin) => {
     setLoading(true);
-    dispatch(LoginAction(values, navigate));
+    const loginData = {
+      email: values.email,
+      user_password: values.user_password
+    };
+    dispatch(LoginAction(loginData, navigate));
   };
   const Loader = () => {
     return <Dots color="#727981" size={32} speed={1} animating={true} />;
@@ -48,8 +52,8 @@ const SigninComponent: React.FC = () => {
     <div>
       <Formik
         initialValues={{
-          password: '',
-          email: ''
+          email: '',
+          user_password: ''
         }}
         onSubmit={(values) => handleLoginSubmit(values)}
         validationSchema={signinSchema}>
@@ -71,13 +75,13 @@ const SigninComponent: React.FC = () => {
                 </p>
                 <input
                   placeholder="password"
-                  name="password"
+                  name="user_password"
                   type="text"
                   onChange={formik.handleChange}
-                  data-testid="password"
+                  data-testid="user_password"
                 />
                 <p className="error-text" data-testid="error-test2">
-                  {formik.errors.password}
+                  {formik.errors.user_password}
                 </p>
               </div>
               <div className="d-flex align-items-center justify-content-center">
