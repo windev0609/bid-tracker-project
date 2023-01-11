@@ -4,7 +4,7 @@ import TokenService from '../Constants/token.service';
 const instance = axios.create({
   baseURL: Constants.BaseUrl,
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/x-www-form-urlencoded'
   }
 });
 
@@ -12,7 +12,7 @@ instance.interceptors.request.use(
   (config) => {
     config.headers = {
       authorization: TokenService.getAccessToken(),
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/x-www-form-urlencoded'
     };
     return config;
   },

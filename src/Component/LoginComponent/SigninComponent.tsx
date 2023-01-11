@@ -13,23 +13,26 @@ import { useNavigate } from 'react-router-dom';
 const signinSchema = Yup.object().shape({
   email: Yup.string().email().required('Enter valid email-id'),
   user_password: Yup.string()
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{8,})/,
-      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character'
-    )
+    // .matches(
+    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{8,})/,
+    //   'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character'
+    // )
     .required('Password is required')
 });
 const SigninComponent: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const LoginResponse = useSelector((state: RootState) => state?.users.status);
-  console.log(LoginResponse, 'same');
+  // console.log(LoginResponse, 'same');
   const [loading, setLoading] = useState<boolean>(false);
   const { AuthTool } = React.useContext(userContext) as UserContextType;
   const handleLoginSubmit = (values: Signin) => {
     setLoading(true);
-    console.log('values:', values);
-    dispatch(LoginAction(values, navigate));
+    const loginData = {
+      email: values.email,
+      user_password: values.user_password
+    };
+    dispatch(LoginAction(loginData, navigate));
   };
   const Loader = () => {
     return <Dots color="#727981" size={32} speed={1} animating={true} />;
@@ -49,8 +52,13 @@ const SigninComponent: React.FC = () => {
     <div>
       <Formik
         initialValues={{
+<<<<<<< HEAD
           user_password: '',
           email: ''
+=======
+          email: '',
+          user_password: ''
+>>>>>>> e6cc090ade9a69a83c680b2456b8b44d668ae3a1
         }}
         onSubmit={(values) => handleLoginSubmit(values)}
         validationSchema={signinSchema}>

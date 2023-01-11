@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import { Constants, ApiEndpoint } from '../Constants/Constant';
 import TokenService from '../Constants/token.service';
 import Api from '../Constants/Instance';
 import { toast } from 'react-toastify';
 import { AppDispatch } from '../store';
 import { Signin, Signup } from '../TypeFile/TypeScriptType';
+import { url } from 'inspector';
 
 export const SignupAction = (data: Signup) => async (dispatch: AppDispatch) => {
   try {
@@ -39,47 +40,38 @@ export const SignupAction = (data: Signup) => async (dispatch: AppDispatch) => {
 
 export const LoginAction = (data: Signin, navigate: any) => async (dispatch: AppDispatch) => {
   try {
-    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-    axios({
-      method: 'get',
-      url: `http://192.168.104.113:8080/api/login`,
-      withCredentials: false,
-      data
-    });
-    // axios.defaults.baseURL = 'http://myurl';
-    // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
-    // axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
     // axios
     //   .post('http://192.168.104.113:8080/api/login', data)
     //   .then((res) => {
-    //     return res.data;
+    //     console.log('res:', res);
     //   })
     //   .catch((err) => {
-    //     console.log('err', err);
-    //     return err;
+    //     console.log('error:', err);
     //   });
-    //   method: 'POST',
-    //   withCredentials: false,
-    //   url: Constants.BaseUrl + ApiEndpoint.LoginAuthentication,
-    //   data
-    // })
-    //   .then((res) => {
-    //     console.log('success', res.data);
-    //     return res.data;
-    //   })
-    //   .catch((err) => {
-    //     console.log('error', err);
-    //     return err;
-    //   });
-    // if (LoginResponse) {
-    //   if (LoginResponse.token && LoginResponse.refreshToken) {
-    //     TokenService.setAccessToken(LoginResponse?.token);
-    //     TokenService.setRefreshToken(LoginResponse?.refreshToken);
-    //     navigate('/dashboard/maindashboard');
-    //   }
-    //   dispatch(setLoginSuccess(LoginResponse));
-    //   dispatch(setStatus('success'));
-    // }
+    console.log('Signin:', data);
+    const LoginResponse = await axios({
+      method: 'POST',
+      url: Constants.BaseUrl + ApiEndpoint.LoginAuthentication,
+      data
+    })
+      .then((res) => {
+        console.log('what is return', res.data);
+        return res.data;
+      })
+      .catch((err) => {
+        console.log('what is error', err);
+        return err;
+      });
+    if (LoginResponse) {
+      navigate('/dashboard/maindashboard');
+      if (LoginResponse.token && LoginResponse.refreshToken) {
+        TokenService.setAccessToken(LoginResponse?.token);
+        TokenService.setRefreshToken(LoginResponse?.refreshToken);
+        navigate('/dashboard/maindashboard');
+      }
+      dispatch(setLoginSuccess(LoginResponse));
+      dispatch(setStatus('success'));
+    }
   } catch (err) {
     const error = err as any;
     const { message } = error.response.data;
