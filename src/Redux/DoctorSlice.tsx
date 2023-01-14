@@ -49,7 +49,8 @@ export const GetDoctorInfo = () => async (dispatch: AppDispatch) => {
       method: 'GET',
       url: Constants.BaseUrl + ApiEndpoint.GetDoctorInfo
     }).then((res) => {
-      return res?.data?.doctorUser;
+      console.log(res);
+      return res?.data;
     });
     if (GetDoctorResponse) {
       dispatch(setDoctorInfo(GetDoctorResponse));
