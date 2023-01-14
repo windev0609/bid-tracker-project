@@ -12,7 +12,7 @@ instance.interceptors.request.use(
   (config) => {
     config.headers = {
       authorization: TokenService.getAccessToken(),
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/json'
     };
     return config;
   },
