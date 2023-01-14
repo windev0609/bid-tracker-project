@@ -26,19 +26,17 @@ interface SpecialistDoctor {
   data: string;
 }
 interface DoctorInfo {
-  email: string;
-  doctorName: string;
-  address: string;
-  phoneNumber: string;
-  dob: string;
-  specialist: string;
-  country: string;
-  yourName: string;
-  doctorImage: string;
-  clientPV: string;
-  clientIV: string;
-  bid: string;
   chat: string;
+  user_name: string;
+  bid_statement: string;
+  client_price: number;
+  client_name: string;
+  client_country: string;
+  client_verify_id: number;
+  client_verify_payment: number;
+  client_join_date: string;
+  bid_num: number;
+  when_jobs: string;
 }
 const initial = {
   email: '',
@@ -95,7 +93,7 @@ const CustomDoctorEdit: React.FC<{ id: string }> = ({ id }) => {
       <Form>
         <div>
           <Grid container spacing={2}>
-            <Grid item xs={6}>
+            {/* <Grid item xs={6}>
               <FormikControl
                 control="input"
                 type="text"
@@ -108,8 +106,8 @@ const CustomDoctorEdit: React.FC<{ id: string }> = ({ id }) => {
                 test="err1"
                 value={values.doctorName}
               />
-            </Grid>
-            <Grid item xs={6}>
+            </Grid> */}
+            {/* <Grid item xs={6}>
               <FormikControl
                 control="input"
                 type="email"
@@ -121,8 +119,8 @@ const CustomDoctorEdit: React.FC<{ id: string }> = ({ id }) => {
                 test="err2"
                 value={values.email}
               />
-            </Grid>
-            <Grid item xs={6}>
+            </Grid> */}
+            {/* <Grid item xs={6}>
               <FormikControl
                 control="input"
                 type="text"
@@ -134,8 +132,8 @@ const CustomDoctorEdit: React.FC<{ id: string }> = ({ id }) => {
                 test="err3"
                 value={values.address}
               />
-            </Grid>
-            <Grid item xs={6}>
+            </Grid> */}
+            {/* <Grid item xs={6}>
               <FormikControl
                 control="input"
                 type="text"
@@ -147,8 +145,8 @@ const CustomDoctorEdit: React.FC<{ id: string }> = ({ id }) => {
                 test="err4"
                 value={values.phoneNumber}
               />
-            </Grid>
-            <Grid item xs={6}>
+            </Grid> */}
+            {/* <Grid item xs={6}>
               <FormikControl
                 control="select"
                 label="Country"
@@ -160,8 +158,8 @@ const CustomDoctorEdit: React.FC<{ id: string }> = ({ id }) => {
                 test="err5"
                 value={values.country}
               />
-            </Grid>
-            <Grid item xs={6}>
+            </Grid> */}
+            {/* <Grid item xs={6}>
               <FormikControl
                 control="select"
                 label="Speciality"
@@ -173,8 +171,8 @@ const CustomDoctorEdit: React.FC<{ id: string }> = ({ id }) => {
                 test="err6"
                 value={values.specialist}
               />
-            </Grid>
-            <Grid item xs={6}>
+            </Grid> */}
+            {/* <Grid item xs={6}>
               <FormikControl
                 control="input"
                 label="Dob"
@@ -186,7 +184,7 @@ const CustomDoctorEdit: React.FC<{ id: string }> = ({ id }) => {
                 test="err7"
                 value={values.dob}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
         </div>
         <div className="d-flex align-items-center justify-content-center gap-3 mt-4">
@@ -206,23 +204,34 @@ const CustomDoctorEdit: React.FC<{ id: string }> = ({ id }) => {
   const MyForm = withFormik({
     mapPropsToValues: () => {
       return {
-        email: EditedDoctor?.email,
-        doctorName: EditedDoctor?.doctorName,
-        address: EditedDoctor?.address,
-        phoneNumber: EditedDoctor?.phoneNumber,
-        dob: convertToDate(EditedDoctor?.dob),
-        specialist: EditedDoctor?.specialist,
-        country: EditedDoctor?.country,
-        yourName: EditedDoctor?.yourName,
-        clientCountry: EditedDoctor?.clientCountry,
-        clientPayPrice: EditedDoctor?.clientPayPrice,
-        whenClientJoin: convertToDate(EditedDoctor?.whenClientJoin),
-        whenJobJoin: convertToDate(EditedDoctor?.whenJobJoin),
-        clientIV: EditedDoctor?.clientIV,
-        bidCount: EditedDoctor?.bidCount,
-        clientPV: EditedDoctor?.clientPV,
-        bid: EditedDoctor?.bid,
-        chat: EditedDoctor?.chat
+        // email: EditedDoctor?.email,
+        // doctorName: EditedDoctor?.doctorName,
+        // address: EditedDoctor?.address,
+        // phoneNumber: EditedDoctor?.phoneNumber,
+        // dob: convertToDate(EditedDoctor?.dob),
+        // specialist: EditedDoctor?.specialist,
+        // country: EditedDoctor?.country,
+        // yourName: EditedDoctor?.yourName,
+        // clientCountry: EditedDoctor?.clientCountry,
+        // clientPayPrice: EditedDoctor?.clientPayPrice,
+        // whenClientJoin: convertToDate(EditedDoctor?.whenClientJoin),
+        // whenJobJoin: convertToDate(EditedDoctor?.whenJobJoin),
+        // clientIV: EditedDoctor?.clientIV,
+        // bidCount: EditedDoctor?.bidCount,
+        // clientPV: EditedDoctor?.clientPV,
+        // bid: EditedDoctor?.bid,
+        // chat: EditedDoctor?.chat
+        user_name: 'kimhae',
+        bid_statement: 'success',
+        client_price: 100,
+        client_name: 'Jackson Wiliwom',
+        client_country: 'portugal',
+        client_verify_id: 1,
+        client_verify_payment: 1,
+        client_join_date: '10',
+        chat: 'Hello! Worker',
+        bid_num: 1,
+        when_jobs: '10'
       };
     },
     handleSubmit: (values) => {
