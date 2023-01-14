@@ -1,3 +1,17 @@
+export interface BidType {
+  id: number;
+  user_name: string;
+  bid_statement: boolean;
+  client_price: number;
+  client_name: string;
+  client_country: string;
+  client_verify_id: number;
+  client_verify_payment: number;
+  client_join_date: number;
+  chat: string;
+  bid_num: number;
+  when_jobs: string;
+}
 export interface Signup {
   username: string;
   password: string;
