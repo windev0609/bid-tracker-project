@@ -57,7 +57,13 @@ const AllDoctor = () => {
   const reportsData = GetDoctorData?.data;
   const getAllDoctorProfiles = useCallback(async () => {
     try {
-      dispatch(GetDoctorInfo());
+      dispatch(GetDoctorInfo())
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } catch (err) {
       console.log(err);
     }
