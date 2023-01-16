@@ -40,6 +40,9 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
     close();
   };
   console.log(editData);
+  // const useformik = useFormik({
+  //   initialValues: {};
+  // });
   // setPropsData(data);
   interface CountryOption {
     id: string;
@@ -80,17 +83,17 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
   });
 
   const initial = {
-    user_name: 'kimhae',
-    bid_statement: 'success',
-    client_price: 100,
-    client_name: 'Jackson Wiliwom',
-    client_country: 'portugal',
-    client_verify_id: 1,
-    client_verify_payment: 1,
-    client_join_date: '10',
-    chat: 'Hello! Worker',
-    bid_num: 1,
-    when_jobs: '10'
+    user_name: editData.user_name,
+    bid_statement: editData.bid_statement,
+    client_price: editData.client_price,
+    client_name: editData.client_name,
+    client_country: editData.client_country,
+    client_verify_id: editData.client_verify_id,
+    client_verify_payment: editData.client_verify_payment,
+    client_join_date: editData.client_join_date,
+    chat: editData.chat,
+    bid_num: editData.bid_num,
+    when_jobs: editData.when_jobs
   };
 
   const CountryOptions: CountryOption[] = [
@@ -172,7 +175,19 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
           </div>
           <div className="modal-body p-3">
             <Formik
-              initialValues={initial}
+              initialValues={{
+                user_name: editData.user_name,
+                bid_statement: editData.bid_statement,
+                client_price: editData.client_price,
+                client_name: editData.client_name,
+                client_country: editData.client_country,
+                client_verify_id: editData.client_verify_id,
+                client_verify_payment: editData.client_verify_payment,
+                client_join_date: editData.client_join_date,
+                chat: editData.chat,
+                bid_num: editData.bid_num,
+                when_jobs: editData.when_jobs
+              }}
               onSubmit={(data) => onSubmit(data)}
               validationSchema={signinSchema}>
               {(formik) => (
@@ -193,10 +208,13 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
                     <Grid container spacing={2}>
                       <Grid item xs={6}>
                         <FormikControl
+                          // default={editData.user_name}
+                          key="user_name"
                           control="input"
                           type="text"
                           label="YourName"
                           name="user_name"
+                          // initialValue={{ user_name: editData.user_name }}
                           onBlur={formik.handleBlur}
                           onChange={formik.handleChange}
                           error={formik.touched.user_name && Boolean(formik.errors.user_name)}
