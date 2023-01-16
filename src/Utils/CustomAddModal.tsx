@@ -76,7 +76,11 @@ const specialistData: SpecialistDoctor[] = [
 type FormikSubmitEvent = FormEvent<HTMLFormElement> & {
   nativeEvent: { submitter?: HTMLButtonElement };
 };
-const CustomAddModal: React.FC<{ id: string }> = ({ id }) => {
+const CustomAddModal: React.FC<{ id: string; open: boolean; close: () => void }> = ({
+  id,
+  open,
+  close
+}) => {
   const [checkError, setCheckError] = useState<boolean>(false);
   const [formEvent, setFormEvent] = useState<FormikSubmitEvent | null>(null);
   const [image, setImg] = useState<string | ArrayBuffer | null>('');
@@ -108,8 +112,9 @@ const CustomAddModal: React.FC<{ id: string }> = ({ id }) => {
       when_jobs: data.when_jobs,
       bid_statement: data.bid_statement
     };
-    setCheckError(!checkError);
+    // setCheckError(!checkError);
     dispatch(PostDoctorInfo(biddata));
+    close;
   };
   const onSubmit = (values: DoctorInfo) => {
     console.log('Form submitting started and let/t see DoctorInfo', values);
@@ -117,235 +122,263 @@ const CustomAddModal: React.FC<{ id: string }> = ({ id }) => {
     alert(`You submitted w/ button "${buttonClicked}"`);
     console.log('Hello Guys', values);
   };
+  const style = {
+    position: 'absolute' as const,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 550,
+    height: 700,
+    bgcolor: 'background.paper',
+    border: '1px solid #000',
+    boxShadow: 24,
+    p: 4,
+    borderRadius: '16px'
+  };
   return (
-    <div className="modal fade" id={id} aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div className="modal-dialog modal-md modal-dialog-scrollable">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">
-              Add Bid
-            </h5>
-            <IoIosClose data-bs-dismiss="modal" aria-label="Close" className="icons" />
-          </div>
-          <div className="modal-body p-3">
-            <Formik
-              initialValues={initial}
-              onSubmit={(data) => onSubmit(data)}
-              validationSchema={signinSchema}>
-              {(formik) => (
-                <Form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    console.log(
-                      'have done have done of preventDefault and let me see "e":',
-                      e,
-                      'and let see now what is formik:',
-                      formik,
-                      'and at last let me know submitting data:',
-                      formik.values
-                    );
-                    handleSubmit(formik.values);
-                  }}>
-                  <div>
-                    <Grid container spacing={2}>
-                      <Grid item xs={6}>
-                        <FormikControl
-                          control="input"
-                          type="text"
-                          label="YourName"
-                          name="user_name"
-                          onBlur={formik.handleBlur}
-                          onChange={formik.handleChange}
-                          error={formik.touched.user_name && Boolean(formik.errors.user_name)}
-                          helperText={formik.touched.user_name && formik.errors.user_name}
-                          test="err1"
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <FormikControl
-                          control="input"
-                          type="text"
-                          label="ClinetName"
-                          name="client_name"
-                          onBlur={formik.handleBlur}
-                          onChange={formik.handleChange}
-                          error={formik.touched.client_name && Boolean(formik.errors.client_name)}
-                          helperText={formik.touched.client_name && formik.errors.client_name}
-                          test="err1"
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <FormikControl
-                          control="input"
-                          type="text"
-                          label="ClientCountry"
-                          name="client_country"
-                          onChange={formik.handleChange}
-                          error={
-                            formik.touched.client_country && Boolean(formik.errors.client_country)
-                          }
-                          helperText={formik.touched.client_country && formik.errors.client_country}
-                          test="err3"
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <FormikControl
-                          control="input"
-                          type="number"
-                          label="ClientPayPrice"
-                          name="client_price"
-                          min={0}
-                          max={1e10}
-                          onChange={formik.handleChange}
-                          error={formik.touched.client_price && Boolean(formik.errors.client_price)}
-                          helperText={formik.touched.client_price && formik.errors.client_price}
-                          test="err4"
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <FormikControl
-                          control="input"
-                          label="WhenClientJoin"
-                          name="client_join_date"
-                          type="date"
-                          onChange={formik.handleChange}
-                          error={
-                            formik.touched.client_join_date &&
-                            Boolean(formik.errors.client_join_date)
-                          }
-                          helperText={
-                            formik.touched.client_join_date && formik.errors.client_join_date
-                          }
-                          test="err7"
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <FormikControl
-                          control="input"
-                          label="WhenJobJoin"
-                          name="when_jobs"
-                          type="date"
-                          onChange={formik.handleChange}
-                          error={formik.touched.when_jobs && Boolean(formik.errors.when_jobs)}
-                          helperText={formik.touched.when_jobs && formik.errors.when_jobs}
-                          test="err7"
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <FormikControl
-                          control="input"
-                          type="number"
-                          label="BidCount"
-                          name="bid_num"
-                          min={0}
-                          max={1e10}
-                          onChange={formik.handleChange}
-                          error={formik.touched.bid_num && Boolean(formik.errors.bid_num)}
-                          helperText={formik.touched.bid_num && formik.errors.bid_num}
-                          test="err4"
-                        />
-                      </Grid>
-                      <Grid item xs={6}></Grid>
-                      <Grid item xs={6}>
-                        <FormikControl
-                          control="select"
-                          type="checkbox"
-                          label="ClientIDVerify"
-                          name="client_verify_id"
-                          options={CountryOptions}
-                          onChange={formik.handleChange}
-                          error={
-                            formik.touched.client_verify_id &&
-                            Boolean(formik.errors.client_verify_id)
-                          }
-                          helperText={
-                            formik.touched.client_verify_id && formik.errors.client_verify_id
-                          }
-                          test="err4"
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <FormikControl
-                          control="select"
-                          type="checkbox"
-                          label="ClientPaymentVerify"
-                          name="client_verify_payment"
-                          options={CountryOptions}
-                          onChange={formik.handleChange}
-                          error={
-                            formik.touched.client_verify_payment &&
-                            Boolean(formik.errors.client_verify_payment)
-                          }
-                          helperText={
-                            formik.touched.client_verify_payment &&
-                            formik.errors.client_verify_payment
-                          }
-                          test="err4"
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <FormikControl
-                          control="input"
-                          type="textField"
-                          // rows={4}
-                          label="Bid"
-                          multilin
-                          name="bid_statement"
-                          onChange={formik.handleChange}
-                          error={
-                            formik.touched.bid_statement && Boolean(formik.errors.bid_statement)
-                          }
-                          helperText={formik.touched.bid_statement && formik.errors.bid_statement}
-                          test="err4"
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <FormikControl
-                          control="input"
-                          type="textField"
-                          // rows={4}
-                          label="Chat"
-                          multilin
-                          name="chat"
-                          onChange={formik.handleChange}
-                          error={formik.touched.chat && Boolean(formik.errors.chat)}
-                          helperText={formik.touched.chat && formik.errors.chat}
-                          test="err4"
-                        />
-                      </Grid>
-                      {/* <Grid item xs={12}>
-                        <mui.FormControl fullWidth sx={{ m: 1 }} variant="standard">
-                          <mui.InputLabel htmlFor="filled-adornment-amount">Chat</mui.InputLabel>
-                          <mui.FilledInput
-                            id="filled-adornment-chat"
-                            name="chat"
-                            rows={4}
-                            multiline
-                          />
-                        </mui.FormControl>
-                      </Grid> */}
-                    </Grid>
-                    <div></div>
-                  </div>
-                  <div className="d-flex align-items-center justify-content-center gap-3 mt-4">
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
-                      Cancel
-                    </button>
-                    <button
-                      type="submit"
-                      className="btn btn-secondary"
-                      data-bs-dismiss={`${checkError ? 'modal' : ''}`}
-                      aria-label="Close">
-                      save
-                    </button>
-                  </div>
-                </Form>
-              )}
-            </Formik>
-          </div>
+    // <div className="modal fade" id={id} aria-labelledby="exampleModalLabel" aria-hidden="true">
+    //   <div className="modal-dialog modal-md modal-dialog-scrollable">
+    //     <div className="modal-content">
+    //       <div className="modal-header">
+    <mui.Modal
+      open={open}
+      onClose={close}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description">
+      <mui.Box sx={style}>
+        <div className="modal-header">
+          <h5 className="modal-title" id="exampleModalLabel">
+            Add Bid
+          </h5>
+          <IoIosClose
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            className="icons"
+            onClick={close}
+          />
         </div>
-      </div>
-    </div>
+        <div className="modal-body p-3">
+          <Formik
+            initialValues={initial}
+            onSubmit={(data) => onSubmit(data)}
+            validationSchema={signinSchema}>
+            {(formik) => (
+              <Form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  console.log(
+                    'have done have done of preventDefault and let me see "e":',
+                    e,
+                    'and let see now what is formik:',
+                    formik,
+                    'and at last let me know submitting data:',
+                    formik.values
+                  );
+                  handleSubmit(formik.values);
+                }}>
+                <div>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                      <FormikControl
+                        control="input"
+                        type="text"
+                        label="YourName"
+                        name="user_name"
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        error={formik.touched.user_name && Boolean(formik.errors.user_name)}
+                        helperText={formik.touched.user_name && formik.errors.user_name}
+                        test="err1"
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <FormikControl
+                        control="input"
+                        type="text"
+                        label="ClinetName"
+                        name="client_name"
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        error={formik.touched.client_name && Boolean(formik.errors.client_name)}
+                        helperText={formik.touched.client_name && formik.errors.client_name}
+                        test="err1"
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <FormikControl
+                        control="input"
+                        type="text"
+                        label="ClientCountry"
+                        name="client_country"
+                        onChange={formik.handleChange}
+                        error={
+                          formik.touched.client_country && Boolean(formik.errors.client_country)
+                        }
+                        helperText={formik.touched.client_country && formik.errors.client_country}
+                        test="err3"
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <FormikControl
+                        control="input"
+                        type="number"
+                        label="ClientPayPrice"
+                        name="client_price"
+                        min={0}
+                        max={1e10}
+                        onChange={formik.handleChange}
+                        error={formik.touched.client_price && Boolean(formik.errors.client_price)}
+                        helperText={formik.touched.client_price && formik.errors.client_price}
+                        test="err4"
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <FormikControl
+                        control="input"
+                        label="WhenClientJoin"
+                        name="client_join_date"
+                        type="date"
+                        onChange={formik.handleChange}
+                        error={
+                          formik.touched.client_join_date && Boolean(formik.errors.client_join_date)
+                        }
+                        helperText={
+                          formik.touched.client_join_date && formik.errors.client_join_date
+                        }
+                        test="err7"
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <FormikControl
+                        control="input"
+                        label="WhenJobJoin"
+                        name="when_jobs"
+                        type="date"
+                        onChange={formik.handleChange}
+                        error={formik.touched.when_jobs && Boolean(formik.errors.when_jobs)}
+                        helperText={formik.touched.when_jobs && formik.errors.when_jobs}
+                        test="err7"
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <FormikControl
+                        control="input"
+                        type="number"
+                        label="BidCount"
+                        name="bid_num"
+                        min={0}
+                        max={1e10}
+                        onChange={formik.handleChange}
+                        error={formik.touched.bid_num && Boolean(formik.errors.bid_num)}
+                        helperText={formik.touched.bid_num && formik.errors.bid_num}
+                        test="err4"
+                      />
+                    </Grid>
+                    <Grid item xs={6}></Grid>
+                    <Grid item xs={6}>
+                      <FormikControl
+                        control="select"
+                        type="checkbox"
+                        label="ClientIDVerify"
+                        name="client_verify_id"
+                        options={CountryOptions}
+                        onChange={formik.handleChange}
+                        error={
+                          formik.touched.client_verify_id && Boolean(formik.errors.client_verify_id)
+                        }
+                        helperText={
+                          formik.touched.client_verify_id && formik.errors.client_verify_id
+                        }
+                        test="err4"
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <FormikControl
+                        control="select"
+                        type="checkbox"
+                        label="ClientPaymentVerify"
+                        name="client_verify_payment"
+                        options={CountryOptions}
+                        onChange={formik.handleChange}
+                        error={
+                          formik.touched.client_verify_payment &&
+                          Boolean(formik.errors.client_verify_payment)
+                        }
+                        helperText={
+                          formik.touched.client_verify_payment &&
+                          formik.errors.client_verify_payment
+                        }
+                        test="err4"
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <FormikControl
+                        control="input"
+                        type="textField"
+                        // rows={4}
+                        label="Bid"
+                        multilin
+                        name="bid_statement"
+                        onChange={formik.handleChange}
+                        error={formik.touched.bid_statement && Boolean(formik.errors.bid_statement)}
+                        helperText={formik.touched.bid_statement && formik.errors.bid_statement}
+                        test="err4"
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <FormikControl
+                        control="input"
+                        type="textField"
+                        // rows={4}
+                        label="Chat"
+                        multilin
+                        name="chat"
+                        onChange={formik.handleChange}
+                        error={formik.touched.chat && Boolean(formik.errors.chat)}
+                        helperText={formik.touched.chat && formik.errors.chat}
+                        test="err4"
+                      />
+                    </Grid>
+                    {/* <Grid item xs={12}>
+                      <mui.FormControl fullWidth sx={{ m: 1 }} variant="standard">
+                        <mui.InputLabel htmlFor="filled-adornment-amount">Chat</mui.InputLabel>
+                        <mui.FilledInput
+                          id="filled-adornment-chat"
+                          name="chat"
+                          rows={4}
+                          multiline
+                        />
+                      </mui.FormControl>
+                    </Grid> */}
+                  </Grid>
+                  <div></div>
+                </div>
+                <div className="d-flex align-items-center justify-content-center gap-3 mt-4">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                    onClick={close}>
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-secondary"
+                    // data-bs-dismiss={`${checkError ? 'modal' : ''}`}
+                    data-bs-dismiss={'modal'}
+                    aria-label="Close">
+                    save
+                  </button>
+                </div>
+              </Form>
+            )}
+          </Formik>
+        </div>
+      </mui.Box>
+    </mui.Modal>
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 export default CustomAddModal;

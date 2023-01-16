@@ -36,15 +36,12 @@ const Header: React.FC = () => {
             />
           </div>
           <div className="header--logo">
-            <img
-              src="https://st2.depositphotos.com/3867453/6216/v/950/depositphotos_62165689-stock-illustration-letter-a-logo-icon-design.jpg"
-              alt="logo"
-            />
+            {/* <img src="C:/Users/cake/Downloads/readme-img1.png" alt="logo" /> */}
           </div>
         </div>
         <div className="d-flex flex-grow-1 justify-content-between align-items-center">
           <div className="header--search d-flex">
-            <input placeholder="search..." className="form-control" />
+            {/* <input placeholder="search..." className="form-control" /> */}
           </div>
           <div className="mobile--show header--icon">
             <div>

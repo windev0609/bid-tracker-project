@@ -1,4 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import store from '../../store';
 import UserProvider from '../../Context/userContext';
@@ -9,6 +10,8 @@ import CustomDoctorEdit from '../../Utils/CustomDoctorEdit';
 import CustomDoctorDelete from '../../Utils/CustomDoctorDelete';
 
 const handleClose = jest.fn();
+const [showModal, setShowModal] = React.useState(false);
+const handleCloseModal = () => setShowModal(false);
 
 const InputCheckRender = () => {
   const nameText = screen.getByTestId('doctorName', { exact: false });
@@ -63,7 +66,7 @@ describe('render doctor page screen', () => {
     render(
       <Provider store={store}>
         <UserProvider>
-          <CustomAddModal id="exampleModal" />
+          <CustomAddModal id="exampleModal" open={showModal} close={handleCloseModal} />
         </UserProvider>
       </Provider>
     );
@@ -74,7 +77,7 @@ describe('render doctor page screen', () => {
     render(
       <Provider store={store}>
         <UserProvider>
-          <CustomAddModal id="exampleModal" />
+          <CustomAddModal id="exampleModal" open={showModal} close={handleCloseModal} />
         </UserProvider>
       </Provider>
     );
@@ -84,7 +87,7 @@ describe('render doctor page screen', () => {
     render(
       <Provider store={store}>
         <UserProvider>
-          <CustomAddModal id="exampleModal" />
+          <CustomAddModal id="exampleModal" open={showModal} close={handleCloseModal} />
         </UserProvider>
       </Provider>
     );
@@ -94,7 +97,7 @@ describe('render doctor page screen', () => {
     render(
       <Provider store={store}>
         <UserProvider>
-          <CustomAddModal id="exampleModal" />
+          <CustomAddModal id="exampleModal" open={showModal} close={handleCloseModal} />
         </UserProvider>
       </Provider>
     );
@@ -104,7 +107,7 @@ describe('render doctor page screen', () => {
     render(
       <Provider store={store}>
         <UserProvider>
-          <CustomAddModal id="exampleModal" />
+          <CustomAddModal id="exampleModal" open={showModal} close={handleCloseModal} />
         </UserProvider>
       </Provider>
     );

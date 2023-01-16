@@ -99,12 +99,15 @@ export const GetDoctorInfo = () => async (dispatch: AppDispatch) => {
 };
 export const UpdateDoctorInfo = (id: string, data: DoctorInfo) => async (dispatch: AppDispatch) => {
   try {
+    console.log('lets see editable id:', id);
     const UpdateDoctorResponse = await Api({
-      method: 'PATCH',
+      method: 'PUT',
       url: Constants.BaseUrl + ApiEndpoint.UpdateDoctorInfo + `/${id}`,
       data
     }).then((res) => {
-      toast.success(res?.data?.message);
+      console.log('what is update response:', res);
+      // toast.success(res?.data?.message);
+      toast.success('Update successful');
       return res?.data;
     });
     if (UpdateDoctorResponse) {
@@ -122,7 +125,8 @@ export const DeleteDoctor = (id: string) => async (dispatch: AppDispatch) => {
       method: 'DELETE',
       url: Constants.BaseUrl + ApiEndpoint.DeleteDoctor + `/${id}`
     }).then((res) => {
-      toast.success(res?.data?.message);
+      // toast.success(res?.data?.message);
+      toast.success('Delete Successful');
       dispatch(GetDoctorInfo());
       return res?.data;
     });

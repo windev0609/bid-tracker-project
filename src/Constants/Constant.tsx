@@ -13,8 +13,8 @@ export class ApiEndpoint {
   static PostPatientInfo = '/patient/patientAdd';
   static GetPatientInfo = '/patient/patientGet';
   static UpdatePatientInfo = '/patient/patientUpdate';
-  static UpdateDoctorInfo = '/doctor/doctorUpdate';
+  static UpdateDoctorInfo = '/api/bids';
   static DeletePatientInfo = '/patient/patientDelete';
   static GetPatienById = 'patientFind';
-  static DeleteDoctor = '/doctor/doctorDelete';
+  static DeleteDoctor = '/api/bids';
 }

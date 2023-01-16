@@ -19,14 +19,14 @@ const style = {
   p: 4
 };
 
-const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; edit: string }> = ({
+const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; edit: any }> = ({
   open,
   close,
   edit
 }) => {
   const dispatch = useDispatch<AppDispatch>();
   const handleDelete = () => {
-    dispatch(DeleteDoctor(edit));
+    dispatch(DeleteDoctor(edit.id));
     close();
   };
   return (
@@ -41,7 +41,7 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; edit: str
             <AiOutlineExclamationCircle className="delete--img" />
           </div>
           <div className="Delete--container d-flex justify-content-center flex-column">
-            <div className="Delete--container-text">Do you want to delete a Doctor?</div>
+            <div className="Delete--container-text">Do you want to delete a Bid?</div>
             <div className="d-flex justify-content-center gap-5 mt-5">
               <button className="Delete--container-btn cancel border-0" onClick={close}>
                 Cancel
