@@ -48,7 +48,7 @@ const Header: React.FC = () => {
               <AiOutlineSearch />
             </div>
           </div>
-          <div className="d-flex gap-2 gap-sm-2 gap-md-2 gap-lg-4 header--icon">
+          {/* <div className="d-flex gap-2 gap-sm-2 gap-md-2 gap-lg-4 header--icon">
             <div>
               <BiCalendar />
             </div>
@@ -64,31 +64,31 @@ const Header: React.FC = () => {
             <div>
               <GiSettingsKnobs />
             </div>
-            <div>
-              <Avatar
-                alt="Remy Sharp"
-                src=""
-                sx={{ width: 35, height: 35, display: 'flex', justifyContent: 'center' }}
-                aria-controls={open ? 'basic-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
-              />
+          </div> */}
+          {/* <div>
+            <Avatar
+              alt="Remy Sharp"
+              src=""
+              sx={{ width: 35, height: 35, display: 'flex', justifyContent: 'center' }}
+              aria-controls={open ? 'basic-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+              onClick={handleClick}
+            />
 
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                  'aria-labelledby': 'basic-button'
-                }}>
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-              </Menu>
-            </div>
-          </div>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button'
+              }}>
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </Menu>
+          </div> */}
         </div>
       </div>
     </div>

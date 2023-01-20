@@ -118,7 +118,7 @@ const AllDoctor = () => {
             component="button"
             // ref={buttonElement}
             variant="contained"
-            size="small"
+            size="large"
             style={{ marginLeft: 16 }}
             // Remove button from tab sequence when cell does not have focus
             tabIndex={hasFocus ? 0 : -1}
@@ -140,7 +140,7 @@ const AllDoctor = () => {
             component="button"
             // ref={buttonElement}
             variant="contained"
-            size="small"
+            size="large"
             color="error"
             style={{ marginLeft: 16 }}
             // Remove button from tab sequence when cell does not have focus
