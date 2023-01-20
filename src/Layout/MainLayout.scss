@@ -1,21 +1,26 @@
 .main--body{
     background-color: #f4f7f6;
     height: 100%;
-    padding: 10px;
+    padding: 0px 10px 0px 20px; 
     width: 100%;
 }
-
-.ant-menu-sub.ant-menu-inline{
-background-color:#f4f7f6 !important;
+.ant-menu-submenu-title {
+    padding-left: 18px !important;
 }
+.ant-menu-sub.ant-menu-inline {
+    background-color:#253238 !important;
+}
+
 .ant-menu{
-    background-color: #f4f7f6;
+    background-color: #fff;
+    font-size: 18px !important;
 }
 .ant-menu-item-selected {
-    color:#5237cc !important;
+    color:#FFF !important;
+    background-color: #2193F680 !important;
 }
-.ant-menu-inline .ant-menu-item::after{
-    border-right: #5237cc;
+.ant-menu-inline {
+    border-right: 1px solid #253238 !important;
 }
 .breadcrumb{
     &-name{

@@ -144,15 +144,16 @@ const MainLayout = () => {
   const activeMenu = SideBarActiveMenu();
   return (
     <div>
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <AppBar
+      <Box sx={{ display: 'flex', background: '#fff' }}>
+        {/* <CssBaseline /> */}
+        {/* <AppBar
           position="fixed"
           sx={{ boxShadow: 'none !important', backgroundColor: '#fff !important' }}>
           <Header />
-        </AppBar>
+        </AppBar> */}
         {hideSidebar && (
           <Drawer
+            style={{ background: '#f4f7f6', padding: '20px 0px 20px 0px' }}
             variant="permanent"
             sx={{
               display: { xs: 'none', md: 'none', lg: 'flex', xl: 'flex' },
@@ -160,15 +161,18 @@ const MainLayout = () => {
               flexShrink: 0,
               [`& .MuiDrawer-paper`]: {
                 width: drawerWidth,
+                height: '-webkit-fill-available',
                 boxSizing: 'border-box',
-                background: '#f4f7f6 !important',
+                background: '#253238 !important',
                 borderRight: '0px',
-                marginTop: '57px'
+                borderRadius: '12px',
+                margin: '10px 10px 10px 10px'
               }
             }}>
+            <span style={{ marginTop: 20, color: '#f4f7f6', fontSize: 22 }}> Example Project </span>
             <Menu
               onClick={onClick}
-              style={{ width: '100%', background: '#f4f7f6' }}
+              style={{ width: '100%', background: '#253238' }}
               defaultSelectedKeys={activeMenu.defaultOpenKeys}
               defaultOpenKeys={activeMenu.defaultSelectedKeys}
               mode="inline"
@@ -176,7 +180,6 @@ const MainLayout = () => {
             />
           </Drawer>
         )}
-
         <div
           className="offcanvas offcanvas-start"
           data-bs-scroll="true"
@@ -186,7 +189,7 @@ const MainLayout = () => {
           <div className="offcanvas-body" data-bs-dismiss="offcanvas" aria-label="Close">
             <Menu
               onClick={onClick}
-              style={{ width: '100%', background: '#f4f7f6' }}
+              style={{ width: '100%', background: '#f4f7f6', paddingLeft: '0px' }}
               defaultSelectedKeys={activeMenu.defaultOpenKeys}
               defaultOpenKeys={activeMenu.defaultSelectedKeys}
               mode="inline"

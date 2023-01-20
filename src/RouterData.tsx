@@ -27,7 +27,7 @@ export const RouterData = [
     path: '/maindashboard',
     component: <MainDashboard />,
     submenu: false,
-    layout: '/dashboard',
+    layout: '/maindashboard',
     key: 'sub1',
     visibleInMenu: true,
     icon: <GoHome />,
@@ -36,7 +36,7 @@ export const RouterData = [
   {
     path: '/viewPatients',
     name: 'All Patients',
-    layout: '/dashboard',
+    layout: '/maindashboard',
     icon: <AiOutlineUserAdd />,
     key: 'sub-patient1',
     component: <ViewPatients />,
