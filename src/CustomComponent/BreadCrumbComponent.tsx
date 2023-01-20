@@ -94,7 +94,7 @@ const BreadCrumbComponent: React.FC<{ pathname: string }> = ({ pathname }) => {
           </div>
           <div className="d-flex flex-column">
             <div>
-              <Breadcrumbs aria-label="breadcrumb">
+              {/* <Breadcrumbs aria-label="breadcrumb">
                 <Link href="/dashboard/maindashboard">
                   <AiOutlineHome className="bread-icon" />
                 </Link>
@@ -105,7 +105,7 @@ const BreadCrumbComponent: React.FC<{ pathname: string }> = ({ pathname }) => {
                     </div>
                   );
                 })}
-              </Breadcrumbs>
+              </Breadcrumbs> */}
             </div>
           </div>
         </div>

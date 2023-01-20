@@ -253,7 +253,7 @@ const AllDoctor = () => {
                 width: '100%',
                 '& .datagrid-box-shadow': {
                   boxShadow: '0px 0px 6px -1px',
-                  borderRadius: '10px',
+                  // borderRadius: '10px',
                   margin: '7.5px 0px 0px 0px'
                 }
               }}>
