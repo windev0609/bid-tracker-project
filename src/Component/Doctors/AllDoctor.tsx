@@ -6,7 +6,7 @@ import {
   GridRenderCellParams,
   GridValueGetterParams
 } from '@mui/x-data-grid';
-import { Button, Grid } from '@mui/material';
+import { Box, Button, Grid, makeStyles, styled } from '@mui/material';
 import AddIcon from '@mui/icons-material/AddSharp';
 import EditIcon from '@mui/icons-material/CreateSharp';
 import DeleteIcon from '@mui/icons-material/DeleteSharp';
@@ -162,38 +162,28 @@ const AllDoctor = () => {
   };
 
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'No', width: 100 },
+    { field: 'id', headerName: 'No', flex: 1 },
     {
       field: 'user_name',
       headerName: 'UserName',
-      width: 300
+      flex: 2
     },
-    { field: 'client_name', headerName: 'ClientName', width: 300 },
+    { field: 'client_name', headerName: 'ClientName', flex: 2 },
     {
       field: 'client_country',
       headerName: 'ClientCountry',
-      width: 300
+      flex: 2
     },
-    { field: 'client_join_date', headerName: 'JoinDate', width: 150 },
-    { field: 'when_jobs', headerName: 'JobJoinDate', width: 150 },
-    { field: 'bid_num', headerName: 'BidCount', width: 105 },
+    { field: 'client_join_date', headerName: 'JoinDate', flex: 2 },
+    { field: 'when_jobs', headerName: 'JobJoinDate', flex: 2 },
+    { field: 'bid_num', headerName: 'BidCount', flex: 1 },
     {
       field: 'action',
       headerName: 'Action',
-      width: 250,
       headerAlign: 'center',
       align: 'center',
-      // renderCell: (params: GridRenderCellParams<Date>) => (
-      //   <strong>
-      //     <Button
-      //       variant="contained"
-      //       size="small"
-      //       style={{ marginLeft: 16 }}
-      //       tabIndex={params.hasFocus ? 0 : -1}
-      //       onClick={handleOpenModal}>
-      //       Detail
-      //     </Button>
-      //   </strong>
+      // width: 50,
+      flex: 3,
       renderCell: RenderData
     }
   ];
@@ -257,15 +247,26 @@ const AllDoctor = () => {
               </strong>
               <CustomAddModal id={'exampleModal'} open={showAddModal} close={handleCloseAddModal} />
             </Grid>
-            <div style={{ height: window.innerHeight * 0.78, width: '100%' }}>
+            <Box
+              sx={{
+                height: '76vh',
+                width: '100%',
+                '& .datagrid-box-shadow': {
+                  boxShadow: '0px 0px 6px -1px',
+                  // borderRadius: '10px',
+                  margin: '7.5px 0px 0px 0px'
+                }
+              }}>
               <DataGrid
                 rows={reportsData ? reportsData : []}
                 columns={columns}
                 pageSize={10}
                 rowsPerPageOptions={[10]}
+                // autoHeight
+                getRowClassName={() => `datagrid-box-shadow`}
                 // checkboxSelection
               />
-            </div>
+            </Box>
           </Grid>
         </Grid>
       </Grid>
