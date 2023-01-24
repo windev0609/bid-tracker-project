@@ -1,12 +1,15 @@
 import React from 'react';
-import { Breadcrumbs, Link, Typography } from '@mui/material';
+import { Breadcrumbs, Link, Menu, Typography } from '@mui/material';
 import '../Component/HeaderComponent/Header.scss';
 import { AiOutlineUser, AiOutlineHome } from 'react-icons/ai';
 import { BiLeftArrowAlt } from 'react-icons/bi';
 import '../Layout/MainLayout.scss';
 import 'antd/dist/antd.css';
+import Avatar from '@mui/material/Avatar';
 import { userContext } from '../Context/userContext';
 import { UserContextType } from '../TypeFile/TypeScriptType';
+import { useNavigate } from 'react-router-dom';
+import MenuItem from '@mui/material/MenuItem';
 
 const BreadCrumbComponent: React.FC<{ pathname: string }> = ({ pathname }) => {
   const breadCrumbsPath = () => {
@@ -61,10 +64,23 @@ const BreadCrumbComponent: React.FC<{ pathname: string }> = ({ pathname }) => {
     }
   };
   const bread = breadCrumbsPath();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
+  const open = Boolean(anchorEl);
 
   const { MobileDrawer, hideSidebar } = React.useContext(userContext) as UserContextType;
   const handleSideBar = () => {
     MobileDrawer(!hideSidebar);
+  };
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleLogout = () => {
+    navigate('/login');
+    sessionStorage.clear();
   };
   return (
     <div className="container-fluid">
@@ -78,7 +94,7 @@ const BreadCrumbComponent: React.FC<{ pathname: string }> = ({ pathname }) => {
           </div>
           <div className="d-flex flex-column">
             <div>
-              <Breadcrumbs aria-label="breadcrumb">
+              {/* <Breadcrumbs aria-label="breadcrumb">
                 <Link href="/dashboard/maindashboard">
                   <AiOutlineHome className="bread-icon" />
                 </Link>
@@ -89,11 +105,39 @@ const BreadCrumbComponent: React.FC<{ pathname: string }> = ({ pathname }) => {
                     </div>
                   );
                 })}
-              </Breadcrumbs>
+              </Breadcrumbs> */}
             </div>
           </div>
         </div>
         <div className="col-sm-12 col-md-6 col-lg-6 col-xl-6 hidden--mobile">
+          <div className="d-flex justify-content-end gap-4">
+            <div>
+              <Avatar
+                alt="Remy Sharp"
+                src=""
+                sx={{ width: 35, height: 35, display: 'flex', justifyContent: 'bottom' }}
+                aria-controls={open ? 'basic-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
+              />
+
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  'aria-labelledby': 'basic-button'
+                }}>
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Menu>
+            </div>
+          </div>
+        </div>
+        {/* <div className="col-sm-12 col-md-6 col-lg-6 col-xl-6 hidden--mobile">
           <div className="d-flex justify-content-end gap-4">
             <div>
               <span className="chartBar">VISITORS</span>
@@ -123,7 +167,7 @@ const BreadCrumbComponent: React.FC<{ pathname: string }> = ({ pathname }) => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
