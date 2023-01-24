@@ -67,11 +67,13 @@ interface FieldProps {
 
 const SelectComponent: React.FC<FieldProps> = (props) => {
   const { options, label, error, helperText, name, test, value, ...rest } = props;
+  console.log('lets see the ...rest:->', rest, rest.type);
   return (
     <>
       <InputLabel
         shrink
         htmlFor="bootstrap-input"
+        {...rest}
         sx={{ display: 'flex', fontSize: '1.3rem', fontWeight: 'bolder' }}>
         {label}
       </InputLabel>

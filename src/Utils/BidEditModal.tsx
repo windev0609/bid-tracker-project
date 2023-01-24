@@ -19,8 +19,8 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 550,
-  height: 700,
+  width: 800,
+  height: 600,
   bgcolor: 'background.paper',
   border: '1px solid #000',
   boxShadow: 24,
@@ -66,6 +66,8 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
     client_join_date: string;
     bid_num: number;
     when_jobs: string;
+    client_job_post: number;
+    client_job_price: number;
   }
   const signinSchema = Yup.object().shape({
     email: Yup.string().email().required('Enter valid email-id'),
@@ -79,7 +81,9 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
     doctorImage: Yup.mixed().required('File is required'),
     client_verify_id: Yup.mixed().required('ClientIdVeryfy is required'),
     client_verify_payment: Yup.mixed().required('ClientPaymentVeryfy is required'),
-    bid_num: Yup.mixed().required('ClientIdVeryfy is required')
+    bid_num: Yup.mixed().required('ClientIdVeryfy is required'),
+    client_job_post: Yup.mixed().required('ClientJobPost is required'),
+    client_job_price: Yup.mixed().required('ClientJobPrice is required')
   });
 
   const initial = {
@@ -93,7 +97,9 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
     client_join_date: editData.client_join_date,
     chat: editData.chat,
     bid_num: editData.bid_num,
-    when_jobs: editData.when_jobs
+    when_jobs: editData.when_jobs,
+    client_job_post: editData.client_job_post,
+    client_job_price: editData.client_job_price
   };
 
   const CountryOptions: CountryOption[] = [
@@ -138,7 +144,9 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
       chat: data.chat,
       bid_num: data.bid_num,
       when_jobs: data.when_jobs,
-      bid_statement: data.bid_statement
+      bid_statement: data.bid_statement,
+      client_job_post: data.client_job_post,
+      client_job_price: data.client_job_price
     };
     console.log('Hello it is edit id:', editData, editData.id);
     // setCheckError(!checkError);
@@ -186,7 +194,9 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
                 client_join_date: editData.client_join_date,
                 chat: editData.chat,
                 bid_num: editData.bid_num,
-                when_jobs: editData.when_jobs
+                when_jobs: editData.when_jobs,
+                client_job_post: editData.client_job_post,
+                client_job_price: editData.client_job_price
               }}
               onSubmit={(data) => onSubmit(data)}
               validationSchema={signinSchema}>
@@ -206,7 +216,7 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
                   }}>
                   <div>
                     <Grid container spacing={2}>
-                      <Grid item xs={6}>
+                      <Grid item xs={3}>
                         <FormikControl
                           // default={editData.user_name}
                           key="user_name"
@@ -222,7 +232,7 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
                           test="err1"
                         />
                       </Grid>
-                      <Grid item xs={5}>
+                      <Grid item xs={3}>
                         <FormikControl
                           control="input"
                           type="text"
@@ -235,7 +245,7 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
                           test="err1"
                         />
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid item xs={3}>
                         <FormikControl
                           control="input"
                           type="text"
@@ -249,7 +259,7 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
                           test="err3"
                         />
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid item xs={3}>
                         <FormikControl
                           control="input"
                           type="number"
@@ -263,12 +273,13 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
                           test="err4"
                         />
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid item xs={3}>
                         <FormikControl
                           control="input"
                           label="WhenClientJoin"
                           name="client_join_date"
                           type="date"
+                          style={{ marginTop: '35px', height: '21px', width: '170px' }}
                           onChange={formik.handleChange}
                           error={
                             formik.touched.client_join_date &&
@@ -280,19 +291,20 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
                           test="err7"
                         />
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid item xs={3}>
                         <FormikControl
                           control="input"
                           label="WhenJobJoin"
                           name="when_jobs"
                           type="date"
+                          style={{ marginTop: '35px', height: '21px', width: '170px' }}
                           onChange={formik.handleChange}
                           error={formik.touched.when_jobs && Boolean(formik.errors.when_jobs)}
                           helperText={formik.touched.when_jobs && formik.errors.when_jobs}
                           test="err7"
                         />
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid item xs={3}>
                         <FormikControl
                           control="input"
                           type="number"
@@ -306,10 +318,47 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
                           test="err4"
                         />
                       </Grid>
-                      <Grid item xs={6}></Grid>
-                      <Grid item xs={6}>
+                      <Grid item xs={3}>
+                        <FormikControl
+                          control="input"
+                          type="number"
+                          label="JobPost"
+                          name="client_job_post"
+                          min={0}
+                          max={1e10}
+                          onChange={formik.handleChange}
+                          error={
+                            formik.touched.client_job_post && Boolean(formik.errors.client_job_post)
+                          }
+                          helperText={
+                            formik.touched.client_job_post && formik.errors.client_job_post
+                          }
+                          test="err4"
+                        />
+                      </Grid>
+                      <Grid item xs={3}>
+                        <FormikControl
+                          control="input"
+                          type="number"
+                          label="client_job_price"
+                          name="client_job_price"
+                          min={0}
+                          max={1e10}
+                          onChange={formik.handleChange}
+                          error={
+                            formik.touched.client_job_price &&
+                            Boolean(formik.errors.client_job_price)
+                          }
+                          helperText={
+                            formik.touched.client_job_price && formik.errors.client_job_price
+                          }
+                          test="err4"
+                        />
+                      </Grid>
+                      <Grid item xs={3}>
                         <FormikControl
                           control="select"
+                          style={{ marginTop: '-3px' }}
                           type="checkbox"
                           label="ClientIDVerify"
                           name="client_verify_id"
@@ -325,11 +374,12 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
                           test="err4"
                         />
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid item xs={3}>
                         <FormikControl
                           control="select"
+                          style={{ marginTop: '-3px' }}
                           type="checkbox"
-                          label="ClientPaymentVerify"
+                          label="CliPayVerify"
                           name="client_verify_payment"
                           options={CountryOptions}
                           onChange={formik.handleChange}
@@ -350,7 +400,9 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
                           type="textField"
                           // rows={4}
                           label="Bid"
-                          multilin
+                          rows={3}
+                          style={{ marginTop: '28px', width: '350px', height: '100px' }}
+                          multiline
                           name="bid_statement"
                           onChange={formik.handleChange}
                           error={
@@ -366,7 +418,9 @@ const CustomDoctorDelete: React.FC<{ open: boolean; close: () => void; editData:
                           type="textField"
                           // rows={4}
                           label="Chat"
-                          multilin
+                          rows={3}
+                          multiline
+                          style={{ marginTop: '28px', width: '350px', height: '100px' }}
                           name="chat"
                           onChange={formik.handleChange}
                           error={formik.touched.chat && Boolean(formik.errors.chat)}

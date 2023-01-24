@@ -1,7 +1,15 @@
 import React, { useState, FormEvent } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { Grid, TextField, Checkbox, FormControlLabel, FormControl } from '@mui/material';
+import {
+  Grid,
+  TextField,
+  Checkbox,
+  FormControlLabel,
+  FormControl,
+  Icon,
+  Button
+} from '@mui/material';
 import FormikControl from '../CustomComponent/FormikControl';
 import { PostDoctorInfo } from '../Redux/DoctorSlice';
 import { useDispatch } from 'react-redux';
@@ -33,6 +41,8 @@ interface DoctorInfo {
   client_join_date: string;
   bid_num: number;
   when_jobs: string;
+  client_job_post: number;
+  client_job_price: number;
 }
 const signinSchema = Yup.object().shape({
   email: Yup.string().email().required('Enter valid email-id'),
@@ -46,7 +56,9 @@ const signinSchema = Yup.object().shape({
   doctorImage: Yup.mixed().required('File is required'),
   client_verify_id: Yup.mixed().required('ClientIdVeryfy is required'),
   client_verify_payment: Yup.mixed().required('ClientPaymentVeryfy is required'),
-  bid_num: Yup.mixed().required('ClientIdVeryfy is required')
+  bid_num: Yup.mixed().required('ClientIdVeryfy is required'),
+  client_job_post: Yup.mixed().required('ClientJobPost is required'),
+  client_job_price: Yup.mixed().required('ClientJobPrice is required')
 });
 
 const initial = {
@@ -60,7 +72,9 @@ const initial = {
   client_join_date: '10',
   chat: 'Hello! Worker',
   bid_num: 1,
-  when_jobs: '10'
+  when_jobs: '10',
+  client_job_post: 10,
+  client_job_price: 9
 };
 
 const CountryOptions: CountryOption[] = [
@@ -110,7 +124,9 @@ const CustomAddModal: React.FC<{ id: string; open: boolean; close: () => void }>
       chat: data.chat,
       bid_num: data.bid_num,
       when_jobs: data.when_jobs,
-      bid_statement: data.bid_statement
+      bid_statement: data.bid_statement,
+      client_job_post: data.client_job_post,
+      client_job_price: data.client_price
     };
     // setCheckError(!checkError);
     dispatch(PostDoctorInfo(biddata));
@@ -127,8 +143,8 @@ const CustomAddModal: React.FC<{ id: string; open: boolean; close: () => void }>
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 550,
-    height: 700,
+    width: 800,
+    height: 600,
     bgcolor: 'background.paper',
     border: '1px solid #000',
     boxShadow: 24,
@@ -178,7 +194,7 @@ const CustomAddModal: React.FC<{ id: string; open: boolean; close: () => void }>
                 }}>
                 <div>
                   <Grid container spacing={2}>
-                    <Grid item xs={6}>
+                    <Grid item xs={3}>
                       <FormikControl
                         control="input"
                         type="text"
@@ -191,7 +207,7 @@ const CustomAddModal: React.FC<{ id: string; open: boolean; close: () => void }>
                         test="err1"
                       />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={3}>
                       <FormikControl
                         control="input"
                         type="text"
@@ -204,7 +220,7 @@ const CustomAddModal: React.FC<{ id: string; open: boolean; close: () => void }>
                         test="err1"
                       />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={3}>
                       <FormikControl
                         control="input"
                         type="text"
@@ -218,7 +234,7 @@ const CustomAddModal: React.FC<{ id: string; open: boolean; close: () => void }>
                         test="err3"
                       />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={3}>
                       <FormikControl
                         control="input"
                         type="number"
@@ -232,12 +248,13 @@ const CustomAddModal: React.FC<{ id: string; open: boolean; close: () => void }>
                         test="err4"
                       />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={3}>
                       <FormikControl
                         control="input"
                         label="WhenClientJoin"
                         name="client_join_date"
                         type="date"
+                        style={{ marginTop: '35px', height: '21px', width: '170px' }}
                         onChange={formik.handleChange}
                         error={
                           formik.touched.client_join_date && Boolean(formik.errors.client_join_date)
@@ -248,9 +265,10 @@ const CustomAddModal: React.FC<{ id: string; open: boolean; close: () => void }>
                         test="err7"
                       />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={3}>
                       <FormikControl
                         control="input"
+                        style={{ marginTop: '35px', height: '21px', width: '170px' }}
                         label="WhenJobJoin"
                         name="when_jobs"
                         type="date"
@@ -260,7 +278,7 @@ const CustomAddModal: React.FC<{ id: string; open: boolean; close: () => void }>
                         test="err7"
                       />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={3}>
                       <FormikControl
                         control="input"
                         type="number"
@@ -274,10 +292,45 @@ const CustomAddModal: React.FC<{ id: string; open: boolean; close: () => void }>
                         test="err4"
                       />
                     </Grid>
-                    <Grid item xs={6}></Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={3}>
+                      <FormikControl
+                        control="input"
+                        type="number"
+                        label="JobPost"
+                        name="client_job_post"
+                        min={0}
+                        max={1e10}
+                        onChange={formik.handleChange}
+                        error={
+                          formik.touched.client_job_post && Boolean(formik.errors.client_job_post)
+                        }
+                        helperText={formik.touched.client_job_post && formik.errors.client_job_post}
+                        test="err4"
+                      />
+                    </Grid>
+                    <Grid item xs={3}>
+                      <FormikControl
+                        control="input"
+                        type="number"
+                        label="client_job_price"
+                        name="client_job_price"
+                        min={0}
+                        max={1e10}
+                        onChange={formik.handleChange}
+                        error={
+                          formik.touched.client_job_price && Boolean(formik.errors.client_job_price)
+                        }
+                        helperText={
+                          formik.touched.client_job_price && formik.errors.client_job_price
+                        }
+                        test="err4"
+                      />
+                    </Grid>
+                    {/* <Grid item xs={6}></Grid> */}
+                    <Grid item xs={3}>
                       <FormikControl
                         control="select"
+                        style={{ marginTop: '-3px' }}
                         type="checkbox"
                         label="ClientIDVerify"
                         name="client_verify_id"
@@ -292,11 +345,12 @@ const CustomAddModal: React.FC<{ id: string; open: boolean; close: () => void }>
                         test="err4"
                       />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={3}>
                       <FormikControl
                         control="select"
+                        style={{ marginTop: '-3px' }}
                         type="checkbox"
-                        label="ClientPaymentVerify"
+                        label="CliPayVerify"
                         name="client_verify_payment"
                         options={CountryOptions}
                         onChange={formik.handleChange}
@@ -315,9 +369,10 @@ const CustomAddModal: React.FC<{ id: string; open: boolean; close: () => void }>
                       <FormikControl
                         control="input"
                         type="textField"
-                        // rows={4}
+                        rows={3}
+                        multiline
+                        style={{ marginTop: '28px', width: '350px', height: '100px' }}
                         label="Bid"
-                        multilin
                         name="bid_statement"
                         onChange={formik.handleChange}
                         error={formik.touched.bid_statement && Boolean(formik.errors.bid_statement)}
@@ -329,9 +384,10 @@ const CustomAddModal: React.FC<{ id: string; open: boolean; close: () => void }>
                       <FormikControl
                         control="input"
                         type="textField"
-                        // rows={4}
+                        rows={3}
+                        multiline
+                        style={{ marginTop: '28px', width: '350px', height: '100px' }}
                         label="Chat"
-                        multilin
                         name="chat"
                         onChange={formik.handleChange}
                         error={formik.touched.chat && Boolean(formik.errors.chat)}
@@ -356,13 +412,18 @@ const CustomAddModal: React.FC<{ id: string; open: boolean; close: () => void }>
                 <div className="d-flex align-items-center justify-content-center gap-3 mt-4">
                   <button
                     type="button"
+                    style={{ marginTop: '21px', marginLeft: '0px' }}
                     className="btn btn-secondary"
+                    aria-multiline
                     data-bs-dismiss="modal"
                     onClick={close}>
                     Cancel
                   </button>
+                  <Grid item xs={0.2}></Grid>
                   <button
                     type="submit"
+                    style={{ marginTop: '21px', marginRight: '0px' }}
+                    // variant="contained"
                     className="btn btn-secondary"
                     // data-bs-dismiss={`${checkError ? 'modal' : ''}`}
                     data-bs-dismiss={'modal'}

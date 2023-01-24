@@ -15,7 +15,8 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
     border: '1px solid #ced4da',
     fontSize: 16,
-    width: '195px',
+    width: '100%',
+    height: '100%',
     padding: '10px 12px',
     transition: theme.transitions.create(['border-color', 'background-color', 'box-shadow']),
     fontFamily: [
@@ -48,7 +49,7 @@ interface FieldProps {
 }
 
 const InputComponent: React.FC<FieldProps> = (props) => {
-  const { label, name, type, onChange, error, helperText, test, value } = props;
+  const { label, name, type, onChange, error, helperText, test, value, ...rest } = props;
   return (
     <div>
       <FormControl variant="standard">
@@ -64,8 +65,9 @@ const InputComponent: React.FC<FieldProps> = (props) => {
           type={type}
           value={value}
           inputProps={{ 'data-testid': name }}
+          {...rest}
           onChange={onChange}
-          sx={{ border: `${error ? '1px solid red' : ''}` }}
+          sx={{ border: `${error ? '0px solid red' : ''}` }}
         />
       </FormControl>
       <span data-testid={test} style={{ color: 'red' }}>
