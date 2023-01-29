@@ -55,10 +55,6 @@ const ViewDoctor = () => {
                       <p className="text-name">
                         <span>Elisse Joson</span> San Francisco, CA
                       </p>
-                      {/* <p className="text-comment">
-                        I&apos;m speaking with myself, number one, because I have a very good brain
-                        and I&apos;ve said a lot of things.
-                      </p> */}
                     </li>
                     <li className="timeline-item mb-5  d-flex align-items-start flex-column">
                       <p className="text-date">11-04-2018 - Today</p>
