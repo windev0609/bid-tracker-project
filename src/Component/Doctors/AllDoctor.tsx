@@ -195,30 +195,6 @@ const AllDoctor = () => {
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <Grid container>
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-              {/* <div className="w-100 h-100 card--shadow">
-                <div className="w-48 h-100 rounded overflow-hidden shadow-lg d-flex justify-content-center align-items-center">
-                  <div className="d-flex justify-content-center p-3 flex-column align-items-center">
-                    <div>
-                      <p
-                        className="add--icon-content"
-                        onClick={() => {
-                          openModal();
-                        }}>
-                        Add new Bid
-                      </p>
-                    </div>
-                    <div className="add--icon">
-                      <AddIcon
-                        data-bs-toggle="modal"
-                        data-bs-target="#exampleModal"
-                        onClick={() => {
-                          openModal();
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div> */}
               <strong>
                 <Button
                   component="button"

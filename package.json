@@ -26,7 +26,7 @@
     "formik": "^2.2.9",
     "manimaran001": "^0.16.0",
     "moment": "^2.29.4",
-    "msw": "^0.44.2",
+    "msw": "^1.0.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-activity": "^2.1.3",
